@@ -19,12 +19,6 @@
       --rose:#e7c8c2;        /* rose tint */
       --shadow:0 10px 30px rgba(0,0,0,.08);
       --radius:20px;
-      --popup-bg: #fff9f5;
-      --popup-border: #e2b899;
-      --popup-success: #c2e7c8;
-      --modal-bg: #fff;
-      --modal-border: #e2b899;
-      --modal-shadow: 0 10px 36px rgba(200,170,150,.13);
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;}
@@ -38,189 +32,36 @@
     @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
     /* Header */
-    header{position:sticky;top:36px;z-index:40;backdrop-filter:saturate(140%) blur(6px);} 
+    header{position:sticky;top:36px;z-index:40;backdrop-filter:saturate(140%) blur(6px);}
     .nav{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:16px}
     .brand{font-family:"Playfair Display",serif;font-weight:700;font-size:26px;letter-spacing:.2px}
     .tag{font-size:12px;color:var(--muted)}
     .actions{display:flex;align-items:center;gap:12px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(0,0,0,.08);border-radius:12px;background:#fff;box-shadow:var(--shadow);cursor:pointer;font-weight:600;transition:transform 0.15s;}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(0,0,0,.08);border-radius:12px;background:#fff;box-shadow:var(--shadow);cursor:pointer;font-weight:600}
     .btn.primary{background:var(--brand);color:#fff;border-color:transparent}
-    .cart-count{background:#000;color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700;transition:transform 0.18s cubic-bezier(.41,2,.58,.6);}
-    .cart-anim { animation: cartBounce 0.35s; }
-    .cart-count-pop { animation: badgePop 0.25s; }
-    @keyframes cartBounce {
-      0%   { transform: scale(1); }
-      25%  { transform: scale(1.22); }
-      50%  { transform: scale(0.92); }
-      75%  { transform: scale(1.10); }
-      100% { transform: scale(1); }
-    }
-    @keyframes badgePop {
-      0%   { transform: scale(1); }
-      60%  { transform: scale(1.35); }
-      100% { transform: scale(1); }
-    }
+    .cart-count{background:#000;color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700;transition:transform .2s ease-out}
     .link{border:none;background:transparent;text-decoration:underline;cursor:pointer;color:var(--brand);font-weight:700}
+    
+    /* Cart Button Animation */
+    .cart-bounce{animation:cart-bounce .6s ease}
+    .cart-count.pop{animation:badge-pop .3s ease-out}
+    @keyframes cart-bounce{0%,100%{transform:translateY(0)} 40%{transform:translateY(-8px)} 60%{transform:translateY(-4px)}}
+    @keyframes badge-pop{50%{transform:scale(1.4)}}
 
-    /* Cart popup notification */
-    .cart-popup {
-      position: fixed;
-      bottom: 36px;
-      right: 26px;
-      min-width: 210px;
-      max-width: 320px;
-      background: var(--popup-bg);
-      color: var(--text);
-      border: 1.5px solid var(--popup-border);
-      border-radius: 16px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.13);
-      padding: 18px 22px 16px 18px;
-      font-size: 16px;
-      font-weight: 600;
-      z-index: 110;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.32s cubic-bezier(.4,1.6,.6,.9);
-    }
-    .cart-popup.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .cart-popup button {
-      margin-left: auto;
-      background: var(--brand);
-      color: #fff;
-      border: none;
-      border-radius: 11px;
-      padding: 7px 14px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(200,150,90,.08);
-      transition: background .15s;
-    }
-    .cart-popup button:hover {
-      background: var(--accent);
-    }
-    .cart-popup .icon {
-      font-size: 20px;
-      margin-right: 3px;
-    }
-
-    /* Delivery modal */
-    .delivery-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 150;
-      display: none;
-    }
-    .delivery-modal.open {
-      display: block;
-    }
-    .delivery-bg {
-      position: absolute;
-      inset: 0;
-      background: rgba(220,200,180,.45);
-    }
-    .delivery-box {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%);
-      background: var(--modal-bg);
-      border-radius: 22px;
-      box-shadow: var(--modal-shadow);
-      min-width: 340px;
-      max-width: 94vw;
-      width: 380px;
-      padding: 28px 24px 18px 24px;
-      border: 1.5px solid var(--modal-border);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      font-size: 16px;
-      color: var(--text);
-    }
-    .delivery-box header {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 11px;
-      text-align: center;
-      color: var(--brand);
-    }
-    .delivery-box label {
-      font-weight: 600;
-      margin-bottom: 4px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-    .delivery-box input, .delivery-box textarea {
-      width: 100%;
-      border: 1px solid #e7c8c2;
-      border-radius: 11px;
-      font-size: 15px;
-      padding: 8px 11px;
-      margin-bottom: 10px;
-      background: #fff8f2;
-      color: var(--text);
-      transition: border .18s;
-    }
-    .delivery-box input:focus, .delivery-box textarea:focus {
-      border-color: var(--brand);
-      outline: none;
-    }
-    .delivery-box textarea {
-      resize: vertical;
-      min-height: 46px;
-      max-height: 110px;
-    }
-    .delivery-box .actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 8px;
-    }
-    .delivery-box .actions button {
-      flex: 1;
-      font-size: 16px;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      padding: 12px 0;
-      cursor: pointer;
-      background: var(--brand);
-      color: #fff;
-      transition: background .15s;
-      box-shadow: 0 2px 8px rgba(200,150,90,.06);
-    }
-    .delivery-box .actions button.cancel {
-      background: #e7c8c2;
-      color: #694e3b;
-    }
-    .delivery-box .actions button:hover {
-      background: var(--accent);
-    }
-    .delivery-box .error {
-      color: #d33c3c;
-      font-size: 13px;
-      margin-bottom: 7px;
-      text-align: center;
-    }
-
-    /* Hero, Products, Cart, Footer, Size Guide Modal — unchanged from your original except for pastel styling above */
-
+    /* Hero */
     .hero{max-width:1180px;margin:22px auto 10px;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;padding:0 20px}
-    .hero-card{background:linear-gradient(140deg,#fff, #fff5ef 40%, var(--rose));border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;display:grid;grid-template-columns:1.05fr .95fr;overf[...]
+    .hero-card{background:linear-gradient(140deg,#fff, #fff5ef 40%, var(--rose));border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
     .hero h1{font-family:"Playfair Display",serif;font-size:40px;line-height:1.1;margin:4px 0 10px}
     .hero p{color:var(--muted);margin:0 0 18px}
     .hero-img{width:100%;height:100%;object-fit:cover;border-radius:18px}
     .badges{display:flex;gap:10px;flex-wrap:wrap}
     .badge{background:#fff;border:1px solid rgba(0,0,0,.06);padding:8px 10px;border-radius:999px;font-size:12px;font-weight:700}
 
+    /* Section titles */
     .section{max-width:1180px;margin:26px auto;padding:0 20px}
     .section h2{font-family:"Playfair Display",serif;font-size:28px;margin:6px 0 14px}
+
+    /* Product grid */
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
     .card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column}
     .cover{aspect-ratio:3/4;background:#f4eee8;border-radius:14px;overflow:hidden}
@@ -238,7 +79,7 @@
     .drawer{position:fixed;inset:0;display:none}
     .drawer.open{display:block}
     .scrim{position:absolute;inset:0;background:rgba(0,0,0,.36)}
-    .panel{position:absolute;right:0;top:0;bottom:0;width:460px;max-width:100%;background:#fff;border-top-left-radius:16px;border-bottom-left-radius:16px;box-shadow:var(--shadow);display:flex;flex-dir[...]
+    .panel{position:absolute;right:0;top:0;bottom:0;width:460px;max-width:100%;background:#fff;border-top-left-radius:16px;border-bottom-left-radius:16px;box-shadow:var(--shadow);display:flex;flex-direction:column}
     .panel header{position:sticky;top:0;backdrop-filter:none}
     .panel .head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #eee}
     .items{flex:1;overflow:auto;padding:12px 16px;display:flex;flex-direction:column;gap:12px}
@@ -256,16 +97,30 @@
     footer{max-width:1180px;margin:40px auto 60px;padding:0 20px;color:var(--muted)}
     footer .cols{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:20px}
 
-    /* Size Guide Modal */
+    /* Generic Modal Styling */
     .modal{position:fixed;inset:0;display:none}
-    .modal.open{display:block}
+    .modal.open{display:block;z-index:100}
     .modal .bg{position:absolute;inset:0;background:rgba(0,0,0,.45)}
-    .modal .box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;border-radius:18px;box-shadow:var(--shadow);width:min(680px,92vw);max-height:86vh;overflow:auto}
+    .modal .box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;border-radius:18px;box-shadow:var(--shadow);width:min(680px,92vw);max-height:86vh;overflow:auto;display:flex;flex-direction:column}
     .box header{padding:16px 18px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
     .box .content{padding:16px 18px}
+    .box footer{max-width:100%;padding:10px 18px;margin:0;border-top:1px solid #eee;display:flex;justify-content:flex-end;gap:10px}
+
+    /* Size Guide Table */
     table{width:100%;border-collapse:collapse}
     th,td{border:1px solid #eee;padding:10px;text-align:center}
     th{background:#faf7f4}
+    
+    /* Delivery Form */
+    .form-group{margin-bottom:14px}
+    .form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+    .form-group input, .form-group textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:10px;background:#faf7f4}
+    .form-group textarea{resize:vertical;min-height:80px}
+
+    /* "Added to Cart" Toast Popup */
+    .toast{position:fixed;bottom:20px;right:20px;z-index:110;background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:12px 16px;display:flex;align-items:center;gap:12px;transform:translateY(150%);opacity:0;transition:transform .4s ease, opacity .4s ease}
+    .toast.show{transform:translateY(0);opacity:1}
+    .toast .btn{padding:8px 12px;border-radius:10px;background:var(--accent);color:#fff;border:none}
 
     /* Responsive */
     @media (max-width:1024px){
@@ -282,13 +137,11 @@
     }
     @media (max-width:420px){
       .grid{grid-template-columns:1fr}
-      .cart-popup {right: 10px; bottom: 10px; max-width: 99vw;}
-      .delivery-box {width: 98vw;}
+      .modal .box{width:min(400px,94vw)}
     }
   </style>
 </head>
 <body>
-  <!-- Announcement / Offers Ticker -->
   <div class="announce" aria-label="Latest offers">
     <div class="announce-inner">
       <div class="ticker" id="tickerA"></div>
@@ -296,7 +149,6 @@
     </div>
   </div>
 
-  <!-- Header -->
   <header>
     <nav class="nav">
       <div>
@@ -306,22 +158,11 @@
       <div class="actions">
         <button class="link" id="openSizeGuide">Size Guide</button>
         <button class="btn" id="whatsBtn" title="Chat on WhatsApp">WhatsApp</button>
-        <button class="btn primary" id="openCart" aria-label="Open cart">
-          <span id="cartIcon" style="display:inline-block;">Cart</span>
-          <span class="cart-count" id="cartCount">0</span>
-        </button>
+        <button class="btn primary" id="openCart" aria-label="Open cart">Cart <span class="cart-count" id="cartCount">0</span></button>
       </div>
     </nav>
   </header>
 
-  <!-- Cart Popup Notification -->
-  <div class="cart-popup" id="cartPopup">
-    <span class="icon">✅</span>
-    <span id="cartPopupText">Added to cart!</span>
-    <button id="viewCartBtn">View Cart</button>
-  </div>
-
-  <!-- Hero -->
   <section class="hero" aria-label="Hero">
     <div class="hero-card">
       <div>
@@ -333,11 +174,10 @@
           <div class="badge">Made in India</div>
         </div>
       </div>
-      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/aruna-nighties-jammigadda-suryapet-readymade[...]">
+      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/aruna-nighties-jammigadda-suryapet-readymade-garment-retailers-ayojtsizaf.jpg"/>
     </div>
   </section>
 
-  <!-- Products -->
   <section class="section" aria-label="Products">
     <div style="display:flex;justify-content:space-between;align-items:end;gap:10px">
       <h2>Trending Nighties</h2>
@@ -346,7 +186,6 @@
     <div class="grid" id="grid"></div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="cols">
       <div>
@@ -366,7 +205,6 @@
     </div>
   </footer>
 
-  <!-- Cart Drawer -->
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="scrim" id="closeCart" tabindex="0" aria-label="Close"></div>
     <aside class="panel" role="dialog" aria-labelledby="cartTitle">
@@ -391,31 +229,11 @@
           <button class="btn" id="clearBtn">Clear</button>
           <button class="btn primary" id="waCheckout">Checkout</button>
         </div>
-        <div class="small">At checkout we’ll ask your <strong>Name</strong>, <strong>Full Address</strong>, and <strong>Pincode</strong>. Cash on Delivery / UPI available.</div>
+        <div class="small">We’ll ask for delivery details next. Cash on Delivery / UPI available.</div>
       </div>
     </aside>
   </div>
 
-  <!-- Delivery Details Modal -->
-  <div class="delivery-modal" id="deliveryModal" aria-hidden="true" role="dialog">
-    <div class="delivery-bg" id="deliveryBg"></div>
-    <form class="delivery-box" id="deliveryForm" autocomplete="on">
-      <header>Delivery Details</header>
-      <div class="error" id="deliveryError" style="display:none;"></div>
-      <label for="custName">Name</label>
-      <input type="text" id="custName" name="custName" placeholder="Your Name" required autocomplete="name" />
-      <label for="custPhone">Phone Number</label>
-      <input type="tel" id="custPhone" name="custPhone" placeholder="Your Phone" required autocomplete="tel" maxlength="14" pattern="[0-9+ ]{8,14}"/>
-      <label for="custAddress">Address</label>
-      <textarea id="custAddress" name="custAddress" placeholder="Full Address (with pincode)" required autocomplete="street-address"></textarea>
-      <div class="actions">
-        <button type="button" class="cancel" id="cancelDelivery">Cancel</button>
-        <button type="submit" id="continueDelivery">Continue</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Size Guide Modal -->
   <div class="modal" id="sizeModal" aria-hidden="true" role="dialog" aria-labelledby="sizeTitle">
     <div class="bg" id="sizeBg"></div>
     <div class="box">
@@ -441,40 +259,61 @@
       </div>
     </div>
   </div>
+  
+  <div class="modal" id="deliveryModal" aria-hidden="true" role="dialog" aria-labelledby="deliveryTitle">
+    <div class="bg" id="deliveryBg"></div>
+    <div class="box">
+      <header>
+        <div id="deliveryTitle" style="font-weight:800">Delivery Details</div>
+      </header>
+      <div class="content">
+        <form id="deliveryForm">
+          <div class="form-group">
+            <label for="custName">Full Name</label>
+            <input type="text" id="custName" required placeholder="Enter your full name">
+          </div>
+          <div class="form-group">
+            <label for="custPhone">Phone Number</label>
+            <input type="tel" id="custPhone" required placeholder="Enter your 10-digit phone number">
+          </div>
+          <div class="form-group">
+            <label for="custAddress">Full Address & Pincode</label>
+            <textarea id="custAddress" required placeholder="House No, Street, City, State, Pincode"></textarea>
+          </div>
+        </form>
+      </div>
+      <footer>
+        <button class="btn" id="closeDelivery">Cancel</button>
+        <button class="btn primary" id="confirmCheckout">Confirm & Checkout</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <span>✅ Added to cart!</span>
+    <button class="btn" id="toastViewCart">View Cart</button>
+  </div>
+
 
   <script>
     /* =====================
        CONFIG — EDIT THESE
        ===================== */
     const BRAND = "Aruna Textiles & Nighties";
-
-    // 1) Enter your WhatsApp Business phone in E.164 format WITHOUT plus sign. Example: 91XXXXXXXXXX
-    const WHATSAPP_NUMBER = "918125210950"; // TODO: replace with your real number
-
-    // 2) Enter your UPI ID for payments (used inside WhatsApp prefill text)
-    const UPI_ID = "9347890690@ybl"; // TODO: replace with your UPI ID
-
-    // 3) Optional: a UPI deep link for faster pay (customers can tap inside WhatsApp)
-    // Example: upi://pay?pa=yourupi@bank&pn=Aruna%20Textiles&cu=INR&am=
-    const UPI_DEEP_LINK_BASE = "upi://pay?pa=yourupi@bank&pn=Aruna%20Textiles&cu=INR&am="; // TODO: replace pa & pn
-
-    // 4) Offers shown in the top ticker
+    const WHATSAPP_NUMBER = "918125210950"; 
+    const UPI_ID = "9347890690@ybl";
+    const UPI_DEEP_LINK_BASE = "upi://pay?pa=yourupi@bank&pn=Aruna%20Textiles&cu=INR&am=";
     const OFFERS = [
-      "Buy 2 Get Jaiyesh Free",
-      "Free Shipping for jaiyesh",
-      "Festive Collection — 20% Off",
-      "New: Maternity & Plus Sizes"
+      "Buy 2 Get 1 Free", "Free Shipping on Orders Over ₹1500", "Festive Collection — 20% Off", "New: Maternity & Plus Sizes"
     ];
-
-    // 5) Demo product catalog — replace images/names/prices as you like
     const PRODUCTS = [
-      {id:"p1", name:"Jaiyesh White", price:799, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/02d4f402eaae8cd5af6c31d873ae6bf3c05609d7/images/1.jpeg", sizes:["M","L",[...]
-      {id:"p2", name:"JAI with black coffee", price:999, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/2.jpeg", sizes:["M","L","XL","XXL","3XL"]},
-      {id:"p3", name:"JAi celebrations", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/3.jpeg", sizes:["M","L","XL"]},
-      {id:"p4", name:"Trial room trials", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/4.jpg", sizes:["L","XL","XXL"]},
-      {id:"p5", name:"first image", price:1299, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/5.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p6", name:"pondy", price:849, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/6.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p7", name:"goa trip with bhAAi", price:1499, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/7.jpeg", sizes:["M","L","XL"]},
+      {id:"p1", name:"Pastel Bloom Nighty", price:799, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/02d4f402eaae8cd5af6c31d873ae6bf3c05609d7/images/1.jpeg", sizes:["M","L","XL","XXL"]},
+      {id:"p2", name:"Crimson Floral Gown", price:999, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/2.jpeg", sizes:["M","L","XL","XXL","3XL"]},
+      {id:"p3", name:"Aqua Polka Dot Set", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/3.jpeg", sizes:["M","L","XL"]},
+      {id:"p4", name:"Lavender Stripe Nighty", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/4.jpg", sizes:["L","XL","XXL"]},
+      {id:"p5", name:"Peach Comfort Gown", price:1299, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/5.jpeg", sizes:["M","L","XL","XXL"]},
+      {id:"p6", name:"Midnight Blue Classic", price:849, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/6.jpeg", sizes:["M","L","XL","XXL"]},
+      {id:"p7", name:"Rose Gold Satin Set", price:1499, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/7.jpeg", sizes:["M","L","XL"]},
       {id:"p8", name:"Classic Solid Nighty", price:699, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/7.jpeg", sizes:["M","L","XL","XXL","3XL"]}
     ];
 
@@ -518,34 +357,54 @@
         });
         const addBtn = make('button',{className:'btn add',textContent:'Add to Cart',ariaLabel:`Add ${p.name} to cart`});
         addBtn.addEventListener('click',()=> addToCart(p, selSize));
+
         const guideBtn = make('button',{className:'link',textContent:'Size Guide'});
         guideBtn.addEventListener('click', openSizeGuide);
+
         const row = make('div',{className:'row'});
         row.append(price, guideBtn);
+
         card.append(cover,title,make('div',{className:'muted',textContent:'100% breathable • Easy-care'}),row,sizeRow,addBtn);
         wrap.appendChild(card);
       });
     }
+    
+    /* =====================
+       CART POPUP NOTIFICATION
+       ===================== */
+    let toastTimeout;
+    function showToast(){
+        clearTimeout(toastTimeout);
+        const toast = el('#toast');
+        toast.classList.add('show');
+        toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
 
     /* =====================
-       CART STATE
+       CART STATE & ANIMATIONS
        ===================== */
     const CART_KEY = 'arunaCart';
     let cart = JSON.parse(localStorage.getItem(CART_KEY)||'[]');
 
     function persist(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); updateBadge(); }
-    function updateBadge(){
-      el('#cartCount').textContent = cart.reduce((a,b)=>a+b.qty,0);
-    }
+    function updateBadge(){ el('#cartCount').textContent = cart.reduce((a,b)=>a+b.qty,0); }
 
     function addToCart(prod, size){
       const existing = cart.find(i=>i.id===prod.id && i.size===size);
       if(existing){ existing.qty += 1; }
       else{ cart.push({id:prod.id,name:prod.name,price:prod.price,size,qty:1,img:prod.img}); }
       persist();
-      popupCart();
-      renderCart();
-      animateCartIcon();
+      showToast(); // Show "Added to cart" popup
+      
+      // Animate cart icon
+      const cartBtn = el('#openCart');
+      cartBtn.classList.add('cart-bounce');
+      cartBtn.addEventListener('animationend', () => cartBtn.classList.remove('cart-bounce'), {once:true});
+      const cartCount = el('#cartCount');
+      cartCount.classList.add('pop');
+      cartCount.addEventListener('animationend', () => cartCount.classList.remove('pop'), {once:true});
+      
+      renderCart(); // Update cart in the background
     }
 
     function removeItem(idx){ cart.splice(idx,1); persist(); renderCart(); }
@@ -568,7 +427,9 @@
       list.innerHTML = '';
       if(cart.length===0){
         list.appendChild(make('div',{className:'muted',textContent:'Your cart is empty.'}));
+        el('#waCheckout').disabled = true;
       }else{
+        el('#waCheckout').disabled = false;
         cart.forEach((i,idx)=>{
           const row = make('div',{className:'item'});
           row.appendChild(make('img',{src:i.img,alt:i.name}));
@@ -594,47 +455,9 @@
     function closeCart(){ el('#drawer').classList.remove('open'); el('#drawer').setAttribute('aria-hidden','true'); }
 
     /* =====================
-       CART POPUP NOTIFICATION
+       WHATSAPP CHECKOUT (with delivery modal)
        ===================== */
-    function popupCart(){
-      const popup = el('#cartPopup');
-      popup.classList.add('show');
-      setTimeout(()=> popup.classList.remove('show'), 3000);
-    }
-    el('#viewCartBtn').onclick = openCart;
-
-    /* =====================
-       CART ICON ANIMATION
-       ===================== */
-    function animateCartIcon(){
-      const icon = el('#cartIcon');
-      const badge = el('#cartCount');
-      icon.classList.add('cart-anim');
-      badge.classList.add('cart-count-pop');
-      setTimeout(()=>icon.classList.remove('cart-anim'),350);
-      setTimeout(()=>badge.classList.remove('cart-count-pop'),250);
-    }
-
-    /* =====================
-       DELIVERY DETAILS MODAL
-       ===================== */
-    function openDeliveryModal(){
-      el('#deliveryModal').classList.add('open');
-      el('#deliveryModal').setAttribute('aria-hidden','false');
-    }
-    function closeDeliveryModal(){
-      el('#deliveryModal').classList.remove('open');
-      el('#deliveryModal').setAttribute('aria-hidden','true');
-      el('#deliveryError').style.display = "none";
-      el('#deliveryForm').reset();
-    }
-    el('#cancelDelivery').onclick = closeDeliveryModal;
-    el('#deliveryBg').onclick = closeDeliveryModal;
-
-    /* =====================
-       UPDATED CHECKOUT PROCESS
-       ===================== */
-    function buildWhatsAppTextWithCustomer(name, phone, address){
+    function buildWhatsAppText(customerDetails){
       const lines = [];
       lines.push(`Hello ${BRAND}! I'd like to place an order:`);
       lines.push('');
@@ -646,83 +469,81 @@
       lines.push('');
       lines.push(`Subtotal: ${toINR(total)}`);
       lines.push('Shipping: To be confirmed');
+      lines.push('---');
+      lines.push('*Delivery Details:*');
+      lines.push(`Name: ${customerDetails.name}`);
+      lines.push(`Phone: ${customerDetails.phone}`);
+      lines.push(`Address: ${customerDetails.address}`);
       lines.push('');
       lines.push('Preferred Payment: UPI / COD');
       lines.push(`UPI ID: ${UPI_ID}`);
       const upiLink = `${UPI_DEEP_LINK_BASE}${encodeURIComponent(String(total))}`;
-      lines.push(`UPI Pay Link (tap): ${upiLink}`);
-      lines.push('');
-      lines.push('Customer details:');
-      lines.push(`Name: ${name}`);
-      lines.push(`Phone: ${phone}`);
-      lines.push(`Address: ${address}`);
+      lines.push(`UPI Pay Link: ${upiLink}`);
       return lines.join('\n');
     }
 
-    // On cart checkout, open delivery modal
-    el('#waCheckout').onclick = function(){
-      if(cart.length === 0) {
-        alert('Your cart is empty. Add items first.');
-        return;
-      }
-      closeCart();
-      openDeliveryModal();
-    };
+    function handleFinalCheckout(){
+        const name = el('#custName').value.trim();
+        const phone = el('#custPhone').value.trim();
+        const address = el('#custAddress').value.trim();
 
-    // On delivery form submit, compile info and redirect to WhatsApp
-    el('#deliveryForm').onsubmit = function(ev){
-      ev.preventDefault();
-      const name = el('#custName').value.trim();
-      const phone = el('#custPhone').value.trim();
-      const address = el('#custAddress').value.trim();
-      if(!name || !phone || !address){
-        el('#deliveryError').textContent = "All fields are required.";
-        el('#deliveryError').style.display = "block";
-        return;
-      }
-      if(!/^\d{8,14}$/.test(phone.replace(/\s+/g,''))){
-        el('#deliveryError').textContent = "Enter a valid phone number (8-14 digits).";
-        el('#deliveryError').style.display = "block";
-        return;
-      }
-      el('#deliveryError').style.display = "none";
-      closeDeliveryModal();
-      openWhatsAppWithCustomer(name, phone, address);
-    };
+        if(!name || !phone || !address){
+            alert('Please fill out all delivery details.');
+            return;
+        }
 
-    function openWhatsAppWithCustomer(name, phone, address){
-      if(!WHATSAPP_NUMBER || WHATSAPP_NUMBER.includes('X')){ alert('Please set WHATSAPP_NUMBER in the code.'); return; }
-      if(cart.length===0){ alert('Your cart is empty. Add items first.'); return; }
-      const msg = encodeURIComponent(buildWhatsAppTextWithCustomer(name, phone, address));
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
-      window.open(url, '_blank');
+        const customerDetails = {name, phone, address};
+        const msg = encodeURIComponent(buildWhatsAppText(customerDetails));
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+        window.open(url, '_blank');
+        closeDeliveryModal();
+    }
+    
+    function openWhatsAppChat(){
+        const url = `https://wa.me/${WHATSAPP_NUMBER}`;
+        window.open(url, '_blank');
     }
 
-    // WhatsApp button (header) still shows general message
-    el('#whatsBtn').onclick = function(){
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank');
-    };
-
     /* =====================
-       SIZE GUIDE MODAL
+       MODAL CONTROLS
        ===================== */
+    // Size Guide
     function openSizeGuide(){ el('#sizeModal').classList.add('open'); el('#sizeModal').setAttribute('aria-hidden','false'); }
     function closeSizeGuide(){ el('#sizeModal').classList.remove('open'); el('#sizeModal').setAttribute('aria-hidden','true'); }
 
+    // Delivery Details
+    function openDeliveryModal(){ el('#deliveryModal').classList.add('open'); el('#deliveryModal').setAttribute('aria-hidden','false'); }
+    function closeDeliveryModal(){ el('#deliveryModal').classList.remove('open'); el('#deliveryModal').setAttribute('aria-hidden','true'); }
+
     /* =====================
-       BOOT
+       BOOT & EVENT LISTENERS
        ===================== */
     buildTicker();
     renderGrid();
     renderCart();
     updateBadge();
 
-    // Header / cart / whats
+    // Cart
     el('#openCart').onclick=openCart; el('#closeCart').onclick=closeCart; el('#xBtn').onclick=closeCart;
-    el('#clearBtn').onclick=clearCart;
+    el('#clearBtn').onclick=clearCart; 
+    
+    // Checkout flow
+    el('#waCheckout').onclick=openDeliveryModal; // Opens delivery form instead of WA
+    el('#confirmCheckout').onclick=handleFinalCheckout; // Confirms form and opens WA
+    el('#whatsBtn').onclick=openWhatsAppChat; // Simple chat button
 
     // Size guide triggers
-    el('#openSizeGuide').onclick=openSizeGuide; el('#openSizeGuide2').onclick=openSizeGuide; el('#sizeBg').onclick=closeSizeGuide; el('#closeSize').onclick=closeSizeGuide;
+    el('#openSizeGuide').onclick=openSizeGuide; el('#openSizeGuide2').onclick=openSizeGuide; 
+    el('#sizeBg').onclick=closeSizeGuide; el('#closeSize').onclick=closeSizeGuide;
+    
+    // New delivery modal triggers
+    el('#deliveryBg').onclick=closeDeliveryModal; el('#closeDelivery').onclick=closeDeliveryModal;
+    
+    // New toast trigger
+    el('#toastViewCart').onclick = () => {
+        openCart();
+        el('#toast').classList.remove('show'); // Hide toast after opening cart
+    };
   </script>
 </body>
 </html>
