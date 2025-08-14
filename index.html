@@ -1,459 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Aruna Textiles & Nighties — Shop</title>
-  <meta name="description" content="Minimal, elegant nightwear shop for women. Add to cart and checkout via WhatsApp in one tap."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#fff8f2;          /* warm cream */
-      --card:#ffffff;
-      --text:#2d2a26;        /* deep brown */
-      --muted:#6f655e;       /* taupe */
-      --brand:#c58f63;       /* soft gold */
-      --accent:#e2b899;      /* blush gold */
-      --rose:#e7c8c2;        /* rose tint */
-      --shadow:0 10px 30px rgba(0,0,0,.08);
-      --radius:20px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aruna Textiles & Nighties</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #fff8f9; }
+    header {
+        background: #f8bbd0; padding: 10px; display: flex; justify-content: space-between; align-items: center;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;}
-    a{color:inherit;text-decoration:none}
-
-    /* Top announcement bar (auto scrolling offers) */
-    .announce{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff}
-    .announce-inner{display:flex;gap:32px;white-space:nowrap;overflow:hidden;padding:8px 0;font-weight:600;letter-spacing:.2px}
-    .ticker{display:inline-flex;gap:40px;animation:scroll 24s linear infinite}
-    .dot{opacity:.75}
-    @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-    /* Header */
-    header{position:sticky;top:36px;z-index:40;backdrop-filter:saturate(140%) blur(6px);} 
-    .nav{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:16px}
-    .brand{font-family:"Playfair Display",serif;font-weight:700;font-size:26px;letter-spacing:.2px}
-    .tag{font-size:12px;color:var(--muted)}
-    .actions{display:flex;align-items:center;gap:12px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(0,0,0,.08);border-radius:12px;background:#fff;box-shadow:var(--shadow);cursor:pointer;font-weight:600}
-    .btn.primary{background:var(--brand);color:#fff;border-color:transparent}
-    .cart-count{background:#000;color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700}
-    .link{border:none;background:transparent;text-decoration:underline;cursor:pointer;color:var(--brand);font-weight:700}
-
-    /* Hero */
-    .hero{max-width:1180px;margin:22px auto 10px;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;padding:0 20px}
-    .hero-card{background:linear-gradient(140deg,#fff, #fff5ef 40%, var(--rose));border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
-    .hero h1{font-family:"Playfair Display",serif;font-size:40px;line-height:1.1;margin:4px 0 10px}
-    .hero p{color:var(--muted);margin:0 0 18px}
-    .hero-img{width:100%;height:100%;object-fit:cover;border-radius:18px}
-    .badges{display:flex;gap:10px;flex-wrap:wrap}
-    .badge{background:#fff;border:1px solid rgba(0,0,0,.06);padding:8px 10px;border-radius:999px;font-size:12px;font-weight:700}
-
-    /* Section titles */
-    .section{max-width:1180px;margin:26px auto;padding:0 20px}
-    .section h2{font-family:"Playfair Display",serif;font-size:28px;margin:6px 0 14px}
-
-    /* Product grid */
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-    .card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column}
-    .cover{aspect-ratio:3/4;background:#f4eee8;border-radius:14px;overflow:hidden}
-    .cover img{width:100%;height:100%;object-fit:cover;display:block}
-    .title{font-weight:700;margin:10px 2px 2px}
-    .price{font-weight:800}
-    .muted{color:var(--muted);font-size:13px}
-    .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
-    .size{display:flex;gap:6px;margin:6px 0}
-    .size button{border:1px solid rgba(0,0,0,.14);background:#fff;border-radius:10px;padding:6px 8px;cursor:pointer;font-weight:700}
-    .size button.active{background:#111;color:#fff;border-color:#111}
-    .add{margin-top:auto}
-
-    /* Cart drawer */
-    .drawer{position:fixed;inset:0;display:none}
-    .drawer.open{display:block}
-    .scrim{position:absolute;inset:0;background:rgba(0,0,0,.36)}
-    .panel{position:absolute;right:0;top:0;bottom:0;width:460px;max-width:100%;background:#fff;border-top-left-radius:16px;border-bottom-left-radius:16px;box-shadow:var(--shadow);display:flex;flex-direction:column}
-    .panel header{position:sticky;top:0;backdrop-filter:none}
-    .panel .head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #eee}
-    .items{flex:1;overflow:auto;padding:12px 16px;display:flex;flex-direction:column;gap:12px}
-    .item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;border:1px solid #eee;border-radius:12px;padding:8px}
-    .item img{width:64px;height:64px;object-fit:cover;border-radius:10px}
-    .qty{display:flex;gap:6px;align-items:center}
-    .qty button{width:28px;height:28px;border-radius:8px;border:1px solid #ddd;background:#fff;cursor:pointer;font-weight:800}
-    .foot{border-top:1px solid #eee;padding:12px 16px;display:grid;gap:8px}
-    .totals{display:grid;grid-template-columns:1fr auto;gap:8px;font-weight:700}
-    .cta{display:flex;gap:8px}
-    .cta .btn{flex:1;justify-content:center;padding:14px 16px;border-radius:14px}
-    .small{font-size:12px;color:var(--muted)}
-
-    /* Footer */
-    footer{max-width:1180px;margin:40px auto 60px;padding:0 20px;color:var(--muted)}
-    footer .cols{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:20px}
-
-    /* Size Guide Modal */
-    .modal{position:fixed;inset:0;display:none}
-    .modal.open{display:block}
-    .modal .bg{position:absolute;inset:0;background:rgba(0,0,0,.45)}
-    .modal .box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;border-radius:18px;box-shadow:var(--shadow);width:min(680px,92vw);max-height:86vh;overflow:auto}
-    .box header{padding:16px 18px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
-    .box .content{padding:16px 18px}
-    table{width:100%;border-collapse:collapse}
-    th,td{border:1px solid #eee;padding:10px;text-align:center}
-    th{background:#faf7f4}
-
-    /* Responsive */
-    @media (max-width:1024px){
-      .grid{grid-template-columns:repeat(3,1fr)}
-      .hero{grid-template-columns:1fr}
-      header{top:34px}
+    .cart {
+        position: relative; cursor: pointer; font-size: 20px;
     }
-    @media (max-width:720px){
-      .grid{grid-template-columns:repeat(2,1fr)}
-      .hero-card{grid-template-columns:1fr}
-      .announce-inner{padding-left:16px}
-      .nav{padding:10px 16px}
-      .brand{font-size:22px}
+    .cart-count {
+        position: absolute; top: -5px; right: -10px; background: #d81b60;
+        color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;
+        animation: pop 0.3s ease;
     }
-    @media (max-width:420px){
-      .grid{grid-template-columns:1fr}
+    @keyframes pop {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
     }
-  </style>
+    .popup {
+        position: fixed; bottom: 20px; right: 20px; background: #fce4ec; color: #880e4f;
+        padding: 10px 20px; border-radius: 10px; display: none; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .product { padding: 20px; border-bottom: 1px solid #f8bbd0; }
+    .btn { background: #d81b60; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 5px; }
+    .btn:hover { background: #ad1457; }
+    /* Delivery form modal */
+    .modal {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center;
+    }
+    .modal-content {
+        background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 400px;
+    }
+    .modal-content input, .modal-content textarea {
+        width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;
+    }
+</style>
 </head>
 <body>
-  <!-- Announcement / Offers Ticker -->
-  <div class="announce" aria-label="Latest offers">
-    <div class="announce-inner">
-      <div class="ticker" id="tickerA"></div>
-      <div class="ticker" id="tickerB" aria-hidden="true"></div>
+
+<header>
+    <h2>Aruna Textiles</h2>
+    <div class="cart" id="cartIcon">🛒<span class="cart-count" id="cartCount">0</span></div>
+</header>
+
+<div class="popup" id="popup">✅ Added to cart</div>
+
+<!-- Products -->
+<div class="product">
+    <h3>Floral Pink Nightie</h3>
+    <select id="size1">
+        <option value="">Select Size</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+    </select>
+    <button class="btn" onclick="addToCart('Floral Pink Nightie', document.getElementById('size1').value)">Add to Cart</button>
+</div>
+
+<div class="product">
+    <h3>Blue Cotton Nightie</h3>
+    <select id="size2">
+        <option value="">Select Size</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+    </select>
+    <button class="btn" onclick="addToCart('Blue Cotton Nightie', document.getElementById('size2').value)">Add to Cart</button>
+</div>
+
+<button class="btn" style="margin:20px;" onclick="openDeliveryForm()">Proceed to WhatsApp</button>
+
+<!-- Delivery form modal -->
+<div class="modal" id="deliveryModal">
+    <div class="modal-content">
+        <h3>Delivery Details</h3>
+        <input type="text" id="custName" placeholder="Full Name" required>
+        <input type="text" id="custPhone" placeholder="Phone Number" required>
+        <textarea id="custAddress" placeholder="Full Address" required></textarea>
+        <button class="btn" onclick="sendToWhatsApp()">Confirm & Send</button>
     </div>
-  </div>
+</div>
 
-  <!-- Header -->
-  <header>
-    <nav class="nav">
-      <div>
-        <div class="brand">Aruna Textiles & Nighties</div>
-        <div class="tag">Cozy • Classy • Comfortable</div>
-      </div>
-      <div class="actions">
-        <button class="link" id="openSizeGuide">Size Guide</button>
-        <button class="btn" id="whatsBtn" title="Chat on WhatsApp">WhatsApp</button>
-        <button class="btn primary" id="openCart" aria-label="Open cart">Cart <span class="cart-count" id="cartCount">0</span></button>
-      </div>
-    </nav>
-  </header>
+<script>
+let cart = [];
 
-  <!-- Hero -->
-  <section class="hero" aria-label="Hero">
-    <div class="hero-card">
-      <div>
-        <h1>Comfortable Nightwear for Effortless Evenings</h1>
-        <p>Soft fabrics, Indian fits, and elegant pastels. Perfect for everyday comfort.</p>
-        <div class="badges">
-          <div class="badge">Easy Returns</div>
-          <div class="badge">Secure WhatsApp Checkout</div>
-          <div class="badge">Made in India</div>
-        </div>
-      </div>
-      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/aruna-nighties-jammigadda-suryapet-readymade-garment-retailers-ayojtsizaf.jpg"/>
-    </div>
-  </section>
+function updateCartCount() {
+    document.getElementById('cartCount').innerText = cart.length;
+}
 
-  <!-- Products -->
-  <section class="section" aria-label="Products">
-    <div style="display:flex;justify-content:space-between;align-items:end;gap:10px">
-      <h2>Trending Nighties</h2>
-      <button class="link" id="openSizeGuide2">View Size Guide</button>
-    </div>
-    <div class="grid" id="grid"></div>
-  </section>
+function showPopup() {
+    let popup = document.getElementById('popup');
+    popup.style.display = 'block';
+    setTimeout(() => { popup.style.display = 'none'; }, 3000);
+}
 
-  <!-- Footer -->
-  <footer>
-    <div class="cols">
-      <div>
-        <div class="brand">Aruna Textiles & Nighties</div>
-        <p>Premium nightwear designed for Indian women. Sizes from M to 3XL. Based in Telangana.</p>
-        <p class="small">For queries: WhatsApp us anytime.</p>
-      </div>
-      <div>
-        <strong>Useful</strong>
-        <p class="small">Size Guide • Care • Returns</p>
-        <p class="small">Suryapet, Telangana</p>
-      </div>
-      <div>
-        <strong>Follow</strong>
-        <p class="small">Instagram • Facebook</p>
-      </div>
-    </div>
-  </footer>
+function addToCart(productName, size) {
+    if (!size) {
+        alert("Please select a size before adding to cart.");
+        return;
+    }
+    cart.push({ productName, size });
+    updateCartCount();
+    showPopup();
+}
 
-  <!-- Cart Drawer -->
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="scrim" id="closeCart" tabindex="0" aria-label="Close"></div>
-    <aside class="panel" role="dialog" aria-labelledby="cartTitle">
-      <div class="head">
-        <div>
-          <div id="cartTitle" style="font-weight:800">Your Cart</div>
-          <div class="small">Review your items and checkout via WhatsApp</div>
-        </div>
-        <button class="btn" id="xBtn" aria-label="Close cart">Close</button>
-      </div>
-      <div class="items" id="items"></div>
-      <div class="foot">
-        <div class="totals">
-          <div>Subtotal</div>
-          <div id="subtotal">₹0</div>
-          <div class="small">Shipping (to confirm on chat)</div>
-          <div class="small">—</div>
-          <div>Total</div>
-          <div id="total">₹0</div>
-        </div>
-        <div class="cta">
-          <button class="btn" id="clearBtn">Clear</button>
-          <button class="btn primary" id="waCheckout">Proceed to WhatsApp</button>
-        </div>
-        <div class="small">At checkout we’ll ask your <strong>Name</strong>, <strong>Full Address</strong>, and <strong>Pincode</strong>. Cash on Delivery / UPI available.</div>
-      </div>
-    </aside>
-  </div>
+function openDeliveryForm() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    document.getElementById('deliveryModal').style.display = 'flex';
+}
 
-  <!-- Size Guide Modal -->
-  <div class="modal" id="sizeModal" aria-hidden="true" role="dialog" aria-labelledby="sizeTitle">
-    <div class="bg" id="sizeBg"></div>
-    <div class="box">
-      <header>
-        <div id="sizeTitle" style="font-weight:800">Size Guide — Nighties</div>
-        <button class="btn" id="closeSize">Close</button>
-      </header>
-      <div class="content">
-        <p class="small">Use your body measurements. If you’re between sizes, choose the larger size for a relaxed fit.</p>
-        <table>
-          <thead>
-            <tr><th>Size</th><th>Bust (cm)</th><th>Waist (cm)</th><th>Hip (cm)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>M</td><td>92–96</td><td>76–80</td><td>98–102</td></tr>
-            <tr><td>L</td><td>96–100</td><td>80–84</td><td>102–106</td></tr>
-            <tr><td>XL</td><td>100–106</td><td>84–90</td><td>106–112</td></tr>
-            <tr><td>XXL</td><td>106–112</td><td>90–96</td><td>112–118</td></tr>
-            <tr><td>3XL</td><td>112–118</td><td>96–102</td><td>118–124</td></tr>
-          </tbody>
-        </table>
-        <p class="small">Note: Measurements are approximate and may vary by style/fabric.</p>
-      </div>
-    </div>
-  </div>
+function sendToWhatsApp() {
+    let name = document.getElementById('custName').value;
+    let phone = document.getElementById('custPhone').value;
+    let address = document.getElementById('custAddress').value;
 
-  <script>
-    /* =====================
-       CONFIG — EDIT THESE
-       ===================== */
-    const BRAND = "Aruna Textiles & Nighties";
-
-    // 1) Enter your WhatsApp Business phone in E.164 format WITHOUT plus sign. Example: 91XXXXXXXXXX
-    const WHATSAPP_NUMBER = "918125210950"; // TODO: replace with your real number
-
-    // 2) Enter your UPI ID for payments (used inside WhatsApp prefill text)
-    const UPI_ID = "9347890690@ybl"; // TODO: replace with your UPI ID
-
-    // 3) Optional: a UPI deep link for faster pay (customers can tap inside WhatsApp)
-    // Example: upi://pay?pa=yourupi@bank&pn=Aruna%20Textiles&cu=INR&am=
-    const UPI_DEEP_LINK_BASE = "upi://pay?pa=yourupi@bank&pn=Aruna%20Textiles&cu=INR&am="; // TODO: replace pa & pn
-
-    // 4) Offers shown in the top ticker
-    const OFFERS = [
-      "Buy 2 Get Jaiyesh Free",
-      "Free Shipping for jaiyesh",
-      "Festive Collection — 20% Off",
-      "New: Maternity & Plus Sizes"
-    ];
-
-    // 5) Demo product catalog — replace images/names/prices as you like
-    const PRODUCTS = [
-      {id:"p1", name:"Jaiyesh White", price:799, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/02d4f402eaae8cd5af6c31d873ae6bf3c05609d7/images/1.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p2", name:"JAI with black coffee", price:999, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/2.jpeg", sizes:["M","L","XL","XXL","3XL"]},
-      {id:"p3", name:"JAi celebrations", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/3.jpeg", sizes:["M","L","XL"]},
-      {id:"p4", name:"Trial room trials", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/4.jpg", sizes:["L","XL","XXL"]},
-      {id:"p5", name:"first image", price:1299, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/5.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p6", name:"pondy", price:849, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/6.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p7", name:"goa trip with bhAAi", price:1499, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/7.jpeg", sizes:["M","L","XL"]},
-      {id:"p8", name:"Classic Solid Nighty", price:699, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/7.jpeg", sizes:["M","L","XL","XXL","3XL"]}
-    ];
-
-    /* =====================
-       UTILITIES
-       ===================== */
-    const toINR = n => new Intl.NumberFormat('en-IN', {style:'currency',currency:'INR',maximumFractionDigits:0}).format(n);
-    const el = sel => document.querySelector(sel);
-    const make = (tag, props={}) => Object.assign(document.createElement(tag), props);
-
-    /* =====================
-       ANNOUNCEMENT TICKER
-       ===================== */
-    function buildTicker(){
-      const nodes = OFFERS.map(o=>`<span>${o}</span><span class="dot">•</span>`).join('');
-      el('#tickerA').innerHTML = nodes + nodes; // duplicate for continuous scroll
-      el('#tickerB').innerHTML = nodes + nodes; // second track
+    if (!name || !phone || !address) {
+        alert("Please fill all delivery details.");
+        return;
     }
 
-    /* =====================
-       PRODUCT GRID RENDER
-       ===================== */
-    function renderGrid(){
-      const wrap = el('#grid');
-      wrap.innerHTML = '';
-      PRODUCTS.forEach(p=>{
-        const card = make('div',{className:'card'});
-        const cover = make('div',{className:'cover'});
-        cover.appendChild(make('img',{src:p.img,alt:p.name}));
-        const title = make('div',{className:'title',textContent:p.name});
-        const price = make('div',{className:'price',textContent:toINR(p.price)});
-        const sizeRow = make('div',{className:'size',role:'group','aria-label':'Choose size'});
-        let selSize = p.sizes[0];
-        p.sizes.forEach(s=>{
-          const b = make('button',{textContent:s});
-          if(s===selSize) b.classList.add('active');
-          b.addEventListener('click',()=>{
-            selSize = s; [...sizeRow.children].forEach(x=>x.classList.remove('active')); b.classList.add('active');
-          });
-          sizeRow.appendChild(b);
-        });
-        const addBtn = make('button',{className:'btn add',textContent:'Add to Cart',ariaLabel:`Add ${p.name} to cart`});
-        addBtn.addEventListener('click',()=> addToCart(p, selSize));
+    let message = `*New Order*%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}%0A%0A*Order Details:*%0A`;
+    cart.forEach(item => {
+        message += `- ${item.productName} (Size: ${item.size})%0A`;
+    });
 
-        const guideBtn = make('button',{className:'link',textContent:'Size Guide'});
-        guideBtn.addEventListener('click', openSizeGuide);
+    let whatsappNumber = "YOUR_WHATSAPP_NUMBER"; // e.g. 919876543210
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+}
+</script>
 
-        const row = make('div',{className:'row'});
-        row.append(price, guideBtn);
-
-        card.append(cover,title,make('div',{className:'muted',textContent:'100% breathable • Easy-care'}),row,sizeRow,addBtn);
-        wrap.appendChild(card);
-      });
-    }
-
-    /* =====================
-       CART STATE
-       ===================== */
-    const CART_KEY = 'arunaCart';
-    let cart = JSON.parse(localStorage.getItem(CART_KEY)||'[]');
-
-    function persist(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); updateBadge(); }
-    function updateBadge(){ el('#cartCount').textContent = cart.reduce((a,b)=>a+b.qty,0); }
-
-    function addToCart(prod, size){
-      const existing = cart.find(i=>i.id===prod.id && i.size===size);
-      if(existing){ existing.qty += 1; }
-      else{ cart.push({id:prod.id,name:prod.name,price:prod.price,size,qty:1,img:prod.img}); }
-      persist();
-      openCart();
-      renderCart();
-    }
-
-    function removeItem(idx){ cart.splice(idx,1); persist(); renderCart(); }
-
-    function changeQty(idx,delta){
-      cart[idx].qty = Math.max(1, cart[idx].qty + delta);
-      persist();
-      renderCart();
-    }
-
-    function clearCart(){ cart = []; persist(); renderCart(); }
-
-    function calcTotal(){ return cart.reduce((s,i)=> s + i.price*i.qty, 0); }
-
-    /* =====================
-       CART UI
-       ===================== */
-    function renderCart(){
-      const list = el('#items');
-      list.innerHTML = '';
-      if(cart.length===0){
-        list.appendChild(make('div',{className:'muted',textContent:'Your cart is empty.'}));
-      }else{
-        cart.forEach((i,idx)=>{
-          const row = make('div',{className:'item'});
-          row.appendChild(make('img',{src:i.img,alt:i.name}));
-          const meta = make('div');
-          meta.appendChild(make('div',{style:'font-weight:700',textContent:i.name}));
-          meta.appendChild(make('div',{className:'small',textContent:`Size: ${i.size}`}));
-          meta.appendChild(make('div',{className:'small',textContent:toINR(i.price)}));
-          row.appendChild(meta);
-          const qty = make('div',{className:'qty'});
-          const minus = make('button',{textContent:'−',ariaLabel:'Decrease'}); minus.onclick=()=>changeQty(idx,-1);
-          const count = make('div',{textContent:i.qty});
-          const plus = make('button',{textContent:'+',ariaLabel:'Increase'}); plus.onclick=()=>changeQty(idx,1);
-          const del = make('button',{textContent:'×',ariaLabel:'Remove'}); del.onclick=()=>removeItem(idx);
-          qty.append(minus,count,plus,del); row.appendChild(qty);
-          list.appendChild(row);
-        });
-      }
-      el('#subtotal').textContent = toINR(calcTotal());
-      el('#total').textContent = toINR(calcTotal());
-    }
-
-    function openCart(){ el('#drawer').classList.add('open'); el('#drawer').setAttribute('aria-hidden','false'); }
-    function closeCart(){ el('#drawer').classList.remove('open'); el('#drawer').setAttribute('aria-hidden','true'); }
-
-    /* =====================
-       WHATSAPP CHECKOUT (with UPI instructions)
-       ===================== */
-    function buildWhatsAppText(){
-      const lines = [];
-      lines.push(`Hello ${BRAND}! I'd like to place an order:`);
-      lines.push('');
-      cart.forEach(i=>{
-        const line = `• ${i.name} (Size: ${i.size}) × ${i.qty} — ${toINR(i.price*i.qty)}`;
-        lines.push(line);
-      });
-      const total = calcTotal();
-      lines.push('');
-      lines.push(`Subtotal: ${toINR(total)}`);
-      lines.push('Shipping: To be confirmed');
-      lines.push('');
-      lines.push('Preferred Payment: UPI / COD');
-      lines.push(`UPI ID: ${UPI_ID}`);
-      // Add a deep link with the amount prefilled (customer taps to open UPI app)
-      const upiLink = `${UPI_DEEP_LINK_BASE}${encodeURIComponent(String(total))}`;
-      lines.push(`UPI Pay Link (tap): ${upiLink}`);
-      lines.push('');
-      lines.push('Customer details:');
-      lines.push('Name:');
-      lines.push('Address:');
-      lines.push('Pincode:');
-      return lines.join('\n');
-    }
-
-    function openWhatsApp(){
-      if(!WHATSAPP_NUMBER || WHATSAPP_NUMBER.includes('X')){ alert('Please set WHATSAPP_NUMBER in the code.'); return; }
-      if(cart.length===0){ alert('Your cart is empty. Add items first.'); return; }
-      const msg = encodeURIComponent(buildWhatsAppText());
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
-      window.open(url, '_blank');
-    }
-
-    /* =====================
-       SIZE GUIDE MODAL
-       ===================== */
-    function openSizeGuide(){ el('#sizeModal').classList.add('open'); el('#sizeModal').setAttribute('aria-hidden','false'); }
-    function closeSizeGuide(){ el('#sizeModal').classList.remove('open'); el('#sizeModal').setAttribute('aria-hidden','true'); }
-
-    /* =====================
-       BOOT
-       ===================== */
-    buildTicker();
-    renderGrid();
-    renderCart();
-    updateBadge();
-
-    // Header / cart / whats
-    el('#openCart').onclick=openCart; el('#closeCart').onclick=closeCart; el('#xBtn').onclick=closeCart;
-    el('#clearBtn').onclick=clearCart; el('#waCheckout').onclick=openWhatsApp; el('#whatsBtn').onclick=openWhatsApp;
-
-    // Size guide triggers
-    el('#openSizeGuide').onclick=openSizeGuide; el('#openSizeGuide2').onclick=openSizeGuide; el('#sizeBg').onclick=closeSizeGuide; el('#closeSize').onclick=closeSizeGuide;
-  </script>
 </body>
 </html>
+
