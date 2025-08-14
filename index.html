@@ -19,43 +19,59 @@
       --rose:#e7c8c2;        /* rose tint */
       --shadow:0 10px 30px rgba(0,0,0,.08);
       --radius:20px;
+      --pastel-green:#c7f3dd;
+      --pastel-orange:#ffe2c6;
+      --pastel-pink:#fcd7e4;
+      --modal-bg:#fff;
+      --modal-shadow:0 12px 40px rgba(0,0,0,.18);
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;}
     a{color:inherit;text-decoration:none}
 
-    /* Top announcement bar (auto scrolling offers) */
     .announce{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff}
     .announce-inner{display:flex;gap:32px;white-space:nowrap;overflow:hidden;padding:8px 0;font-weight:600;letter-spacing:.2px}
     .ticker{display:inline-flex;gap:40px;animation:scroll 24s linear infinite}
     .dot{opacity:.75}
     @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    /* Header */
     header{position:sticky;top:36px;z-index:40;backdrop-filter:saturate(140%) blur(6px);} 
     .nav{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:16px}
     .brand{font-family:"Playfair Display",serif;font-weight:700;font-size:26px;letter-spacing:.2px}
     .tag{font-size:12px;color:var(--muted)}
     .actions{display:flex;align-items:center;gap:12px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(0,0,0,.08);border-radius:12px;background:#fff;box-shadow:var(--shadow);cursor:pointer;font-weight:600}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(0,0,0,.08);border-radius:12px;background:#fff;box-shadow:var(--shadow);cursor:pointer;font-weight:600;transition:transform .18s cubic-bezier(.6,1.5,.6,1);}
     .btn.primary{background:var(--brand);color:#fff;border-color:transparent}
-    .cart-count{background:#000;color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700}
+    .cart-count{background:#000;color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700;transition:transform .18s cubic-bezier(.6,1.5,.6,1);}
+    .cart-bounce{animation:cartBounce .34s cubic-bezier(.62,1.6,.62,1);}
+    .badge-pop{animation:badgePop .3s cubic-bezier(.62,1.6,.62,1);}
+    @keyframes cartBounce{
+      0%{transform:scale(1);}
+      30%{transform:scale(1.18);}
+      55%{transform:scale(1.05);}
+      80%{transform:scale(1.13);}
+      100%{transform:scale(1);}
+    }
+    @keyframes badgePop{
+      0%{transform:scale(1);}
+      30%{transform:scale(1.38);}
+      55%{transform:scale(1.13);}
+      80%{transform:scale(1.22);}
+      100%{transform:scale(1);}
+    }
     .link{border:none;background:transparent;text-decoration:underline;cursor:pointer;color:var(--brand);font-weight:700}
 
-    /* Hero */
     .hero{max-width:1180px;margin:22px auto 10px;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;padding:0 20px}
-    .hero-card{background:linear-gradient(140deg,#fff, #fff5ef 40%, var(--rose));border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
+    .hero-card{background:linear-gradient(140deg,#fff, #fff5ef 40%, var(--rose));border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;display:grid;grid-template-columns:1.05fr .95fr;overf[...]
     .hero h1{font-family:"Playfair Display",serif;font-size:40px;line-height:1.1;margin:4px 0 10px}
     .hero p{color:var(--muted);margin:0 0 18px}
     .hero-img{width:100%;height:100%;object-fit:cover;border-radius:18px}
     .badges{display:flex;gap:10px;flex-wrap:wrap}
     .badge{background:#fff;border:1px solid rgba(0,0,0,.06);padding:8px 10px;border-radius:999px;font-size:12px;font-weight:700}
 
-    /* Section titles */
     .section{max-width:1180px;margin:26px auto;padding:0 20px}
     .section h2{font-family:"Playfair Display",serif;font-size:28px;margin:6px 0 14px}
 
-    /* Product grid */
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
     .card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column}
     .cover{aspect-ratio:3/4;background:#f4eee8;border-radius:14px;overflow:hidden}
@@ -69,11 +85,10 @@
     .size button.active{background:#111;color:#fff;border-color:#111}
     .add{margin-top:auto}
 
-    /* Cart drawer */
     .drawer{position:fixed;inset:0;display:none}
     .drawer.open{display:block}
     .scrim{position:absolute;inset:0;background:rgba(0,0,0,.36)}
-    .panel{position:absolute;right:0;top:0;bottom:0;width:460px;max-width:100%;background:#fff;border-top-left-radius:16px;border-bottom-left-radius:16px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .panel{position:absolute;right:0;top:0;bottom:0;width:460px;max-width:100%;background:#fff;border-top-left-radius:16px;border-bottom-left-radius:16px;box-shadow:var(--shadow);display:flex;flex-dir[...]
     .panel header{position:sticky;top:0;backdrop-filter:none}
     .panel .head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid #eee}
     .items{flex:1;overflow:auto;padding:12px 16px;display:flex;flex-direction:column;gap:12px}
@@ -87,11 +102,134 @@
     .cta .btn{flex:1;justify-content:center;padding:14px 16px;border-radius:14px}
     .small{font-size:12px;color:var(--muted)}
 
-    /* Footer */
+    /* Popup Notification */
+    .cart-popup{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      min-width:220px;
+      background:var(--pastel-green);
+      color:var(--text);
+      border-radius:14px;
+      box-shadow:var(--modal-shadow);
+      padding:18px 24px;
+      z-index:100;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      animation:popupAppear .32s cubic-bezier(.6,1.5,.6,1);
+      font-weight:600;
+      gap:10px;
+      border:2px solid var(--brand);
+    }
+    @keyframes popupAppear{
+      0%{opacity:0;transform:translateY(30px) scale(0.95);}
+      100%{opacity:1;transform:translateY(0) scale(1);}
+    }
+    .cart-popup .popup-btn{
+      background:var(--brand);
+      color:#fff;
+      border:none;
+      border-radius:8px;
+      font-weight:700;
+      padding:8px 18px;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+      font-size:14px;
+      transition:background .16s;
+    }
+    .cart-popup .popup-btn:hover{
+      background:var(--accent);
+    }
+
+    /* Delivery Modal */
+    .delivery-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.25);
+      z-index:99;
+      display:none;
+      align-items:center;
+      justify-content:center;
+    }
+    .delivery-modal.open{display:flex;}
+    .delivery-box{
+      background:var(--modal-bg);
+      border-radius:18px;
+      box-shadow:var(--modal-shadow);
+      width:min(360px,95vw);
+      padding:28px 24px 20px;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      gap:16px;
+      animation:modalAppear .33s cubic-bezier(.6,1.7,.6,1);
+    }
+    @keyframes modalAppear{
+      0%{opacity:0;transform:scale(.85);}
+      100%{opacity:1;transform:scale(1);}
+    }
+    .delivery-box header{
+      font-family:"Playfair Display",serif;
+      font-size:22px;
+      font-weight:700;
+      margin-bottom:4px;
+      text-align:center;
+    }
+    .delivery-form label{
+      font-weight:600;
+      margin-bottom:2px;
+      color:var(--brand);
+      font-size:14px;
+      display:block;
+    }
+    .delivery-form input, .delivery-form textarea{
+      width:100%;
+      padding:8px 10px;
+      border:1px solid #e2b899;
+      border-radius:8px;
+      font-size:15px;
+      margin-bottom:10px;
+      background:var(--rose);
+      color:var(--text);
+      font-family:inherit;
+      resize:none;
+      box-sizing:border-box;
+    }
+    .delivery-form textarea{height:64px;}
+    .delivery-form .modal-actions{
+      display:flex;
+      gap:10px;
+      margin-top:8px;
+    }
+    .delivery-form .btn{
+      flex:1;
+      justify-content:center;
+      font-size:15px;
+      padding:12px 0;
+      border-radius:10px;
+      margin:0;
+    }
+    .delivery-form .btn.cancel{
+      background:var(--muted);
+      color:#fff;
+      border-color:transparent;
+    }
+    .delivery-form .btn.confirm{
+      background:var(--brand);
+      color:#fff;
+      border-color:transparent;
+    }
+    .delivery-error{
+      color:#c00;
+      font-size:13px;
+      margin-bottom:4px;
+      text-align:center;
+    }
+
     footer{max-width:1180px;margin:40px auto 60px;padding:0 20px;color:var(--muted)}
     footer .cols{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:20px}
 
-    /* Size Guide Modal */
     .modal{position:fixed;inset:0;display:none}
     .modal.open{display:block}
     .modal .bg{position:absolute;inset:0;background:rgba(0,0,0,.45)}
@@ -102,7 +240,6 @@
     th,td{border:1px solid #eee;padding:10px;text-align:center}
     th{background:#faf7f4}
 
-    /* Responsive */
     @media (max-width:1024px){
       .grid{grid-template-columns:repeat(3,1fr)}
       .hero{grid-template-columns:1fr}
@@ -114,9 +251,11 @@
       .announce-inner{padding-left:16px}
       .nav{padding:10px 16px}
       .brand{font-size:22px}
+      .cart-popup{right:10px;bottom:10px;}
     }
     @media (max-width:420px){
       .grid{grid-template-columns:1fr}
+      .cart-popup{right:4px;bottom:4px;}
     }
   </style>
 </head>
@@ -139,7 +278,15 @@
       <div class="actions">
         <button class="link" id="openSizeGuide">Size Guide</button>
         <button class="btn" id="whatsBtn" title="Chat on WhatsApp">WhatsApp</button>
-        <button class="btn primary" id="openCart" aria-label="Open cart">Cart <span class="cart-count" id="cartCount">0</span></button>
+        <button class="btn primary" id="openCart" aria-label="Open cart">
+          <span style="display:inline-block;vertical-align:middle;">
+            <!-- Cart icon SVG -->
+            <svg id="cartIconSvg" height="22" width="22" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:4px;">
+              <path d="M6 6h15l-2 11H7L6 6zm0 0L4 2H2" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Cart <span class="cart-count" id="cartCount">0</span>
+        </button>
       </div>
     </nav>
   </header>
@@ -156,7 +303,7 @@
           <div class="badge">Made in India</div>
         </div>
       </div>
-      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/aruna-nighties-jammigadda-suryapet-readymade-garment-retailers-ayojtsizaf.jpg"/>
+      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/aruna-nighties-jammigadda-suryapet-readymade.jpg">
     </div>
   </section>
 
@@ -212,11 +359,35 @@
         </div>
         <div class="cta">
           <button class="btn" id="clearBtn">Clear</button>
-          <button class="btn primary" id="waCheckout">Proceed to WhatsApp</button>
+          <button class="btn primary" id="waCheckout">Proceed to Checkout</button>
         </div>
         <div class="small">At checkout we’ll ask your <strong>Name</strong>, <strong>Full Address</strong>, and <strong>Pincode</strong>. Cash on Delivery / UPI available.</div>
       </div>
     </aside>
+  </div>
+
+  <!-- Delivery Details Modal -->
+  <div class="delivery-modal" id="deliveryModal">
+    <form class="delivery-box delivery-form" id="deliveryForm" autocomplete="off">
+      <header>Delivery Details</header>
+      <div class="delivery-error" id="deliveryError"></div>
+      <label for="custName">Name</label>
+      <input id="custName" name="custName" type="text" required maxlength="60" autocomplete="name" placeholder="Your full name">
+      <label for="custPhone">Phone Number</label>
+      <input id="custPhone" name="custPhone" type="tel" pattern="[0-9]{10,13}" required maxlength="13" autocomplete="tel" placeholder="10-digit phone number">
+      <label for="custAddress">Address</label>
+      <textarea id="custAddress" name="custAddress" required maxlength="200" autocomplete="street-address" placeholder="Full address inc. city & pincode"></textarea>
+      <div class="modal-actions">
+        <button type="button" class="btn cancel" id="cancelDelivery">Cancel</button>
+        <button type="submit" class="btn confirm" id="submitDelivery">Confirm & Send</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Add to Cart Popup -->
+  <div class="cart-popup" id="cartPopup" style="display:none;">
+    <span>✅ Added to cart!</span>
+    <button class="popup-btn" id="viewCartBtn">View Cart</button>
   </div>
 
   <!-- Size Guide Modal -->
@@ -251,18 +422,10 @@
        CONFIG — EDIT THESE
        ===================== */
     const BRAND = "Aruna Textiles & Nighties";
-
-    // 1) Enter your WhatsApp Business phone in E.164 format WITHOUT plus sign. Example: 91XXXXXXXXXX
     const WHATSAPP_NUMBER = "918125210950"; // TODO: replace with your real number
-
-    // 2) Enter your UPI ID for payments (used inside WhatsApp prefill text)
     const UPI_ID = "9347890690@ybl"; // TODO: replace with your UPI ID
-
-    // 3) Optional: a UPI deep link for faster pay (customers can tap inside WhatsApp)
-    // Example: upi://pay?pa=yourupi@bank&pn=Aruna%20Textiles&cu=INR&am=
     const UPI_DEEP_LINK_BASE = "upi://pay?pa=yourupi@bank&pn=Aruna%20Textiles&cu=INR&am="; // TODO: replace pa & pn
 
-    // 4) Offers shown in the top ticker
     const OFFERS = [
       "Buy 2 Get Jaiyesh Free",
       "Free Shipping for jaiyesh",
@@ -270,9 +433,8 @@
       "New: Maternity & Plus Sizes"
     ];
 
-    // 5) Demo product catalog — replace images/names/prices as you like
     const PRODUCTS = [
-      {id:"p1", name:"Jaiyesh White", price:799, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/02d4f402eaae8cd5af6c31d873ae6bf3c05609d7/images/1.jpeg", sizes:["M","L","XL","XXL"]},
+      {id:"p1", name:"Jaiyesh White", price:799, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/02d4f402eaae8cd5af6c31d873ae6bf3c05609d7/images/1.jpeg", sizes:["M","L","XL","XXL","3XL"]},
       {id:"p2", name:"JAI with black coffee", price:999, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/2.jpeg", sizes:["M","L","XL","XXL","3XL"]},
       {id:"p3", name:"JAi celebrations", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/3.jpeg", sizes:["M","L","XL"]},
       {id:"p4", name:"Trial room trials", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/4.jpg", sizes:["L","XL","XXL"]},
@@ -341,15 +503,33 @@
     let cart = JSON.parse(localStorage.getItem(CART_KEY)||'[]');
 
     function persist(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); updateBadge(); }
-    function updateBadge(){ el('#cartCount').textContent = cart.reduce((a,b)=>a+b.qty,0); }
+    function updateBadge(){ 
+      el('#cartCount').textContent = cart.reduce((a,b)=>a+b.qty,0); 
+    }
+
+    function animateCartIcon() {
+      const cartBtn = el('#openCart');
+      const cartCount = el('#cartCount');
+      cartBtn.classList.add('cart-bounce');
+      cartCount.classList.add('badge-pop');
+      setTimeout(() => cartBtn.classList.remove('cart-bounce'), 380);
+      setTimeout(() => cartCount.classList.remove('badge-pop'), 320);
+    }
+
+    function showCartPopup(){
+      const popup = el('#cartPopup');
+      popup.style.display = 'flex';
+      setTimeout(()=>{ popup.style.display='none'; }, 3000);
+    }
 
     function addToCart(prod, size){
       const existing = cart.find(i=>i.id===prod.id && i.size===size);
       if(existing){ existing.qty += 1; }
       else{ cart.push({id:prod.id,name:prod.name,price:prod.price,size,qty:1,img:prod.img}); }
       persist();
-      openCart();
       renderCart();
+      animateCartIcon();
+      showCartPopup();
     }
 
     function removeItem(idx){ cart.splice(idx,1); persist(); renderCart(); }
@@ -398,9 +578,31 @@
     function closeCart(){ el('#drawer').classList.remove('open'); el('#drawer').setAttribute('aria-hidden','true'); }
 
     /* =====================
-       WHATSAPP CHECKOUT (with UPI instructions)
+       DELIVERY MODAL LOGIC
        ===================== */
-    function buildWhatsAppText(){
+    function openDeliveryModal(){
+      el('#deliveryModal').classList.add('open');
+      el('#deliveryError').textContent = '';
+      el('#deliveryForm').reset();
+      el('#custName').focus();
+    }
+    function closeDeliveryModal(){
+      el('#deliveryModal').classList.remove('open');
+    }
+    el('#cancelDelivery').onclick = closeDeliveryModal;
+
+    function validateDeliveryForm(){
+      const name = el('#custName').value.trim();
+      const phone = el('#custPhone').value.trim();
+      const address = el('#custAddress').value.trim();
+      let error = '';
+      if(name.length<3) error = "Please enter your full name.";
+      else if(!/^[0-9]{10,13}$/.test(phone)) error = "Enter a valid phone number (10-13 digits).";
+      else if(address.length<10) error = "Enter full address with pincode.";
+      return error;
+    }
+
+    function buildOrderTextWithCustomer(name, phone, address){
       const lines = [];
       lines.push(`Hello ${BRAND}! I'd like to place an order:`);
       lines.push('');
@@ -411,49 +613,4 @@
       const total = calcTotal();
       lines.push('');
       lines.push(`Subtotal: ${toINR(total)}`);
-      lines.push('Shipping: To be confirmed');
-      lines.push('');
-      lines.push('Preferred Payment: UPI / COD');
-      lines.push(`UPI ID: ${UPI_ID}`);
-      // Add a deep link with the amount prefilled (customer taps to open UPI app)
-      const upiLink = `${UPI_DEEP_LINK_BASE}${encodeURIComponent(String(total))}`;
-      lines.push(`UPI Pay Link (tap): ${upiLink}`);
-      lines.push('');
-      lines.push('Customer details:');
-      lines.push('Name:');
-      lines.push('Address:');
-      lines.push('Pincode:');
-      return lines.join('\n');
-    }
-
-    function openWhatsApp(){
-      if(!WHATSAPP_NUMBER || WHATSAPP_NUMBER.includes('X')){ alert('Please set WHATSAPP_NUMBER in the code.'); return; }
-      if(cart.length===0){ alert('Your cart is empty. Add items first.'); return; }
-      const msg = encodeURIComponent(buildWhatsAppText());
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
-      window.open(url, '_blank');
-    }
-
-    /* =====================
-       SIZE GUIDE MODAL
-       ===================== */
-    function openSizeGuide(){ el('#sizeModal').classList.add('open'); el('#sizeModal').setAttribute('aria-hidden','false'); }
-    function closeSizeGuide(){ el('#sizeModal').classList.remove('open'); el('#sizeModal').setAttribute('aria-hidden','true'); }
-
-    /* =====================
-       BOOT
-       ===================== */
-    buildTicker();
-    renderGrid();
-    renderCart();
-    updateBadge();
-
-    // Header / cart / whats
-    el('#openCart').onclick=openCart; el('#closeCart').onclick=closeCart; el('#xBtn').onclick=closeCart;
-    el('#clearBtn').onclick=clearCart; el('#waCheckout').onclick=openWhatsApp; el('#whatsBtn').onclick=openWhatsApp;
-
-    // Size guide triggers
-    el('#openSizeGuide').onclick=openSizeGuide; el('#openSizeGuide2').onclick=openSizeGuide; el('#sizeBg').onclick=closeSizeGuide; el('#closeSize').onclick=closeSizeGuide;
-  </script>
-</body>
-</html>
+      lines.push('
