@@ -10,35 +10,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fffbfd;          /* Off-white with a hint of pink */
+      --bg: #fffbfd;
       --card: #ffffff;
-      --text: #4a2342;        /* Deep Plum/Aubergine */
-      --muted: #91778e;       /* Muted purple-gray */
-      --brand: #c2185b;       /* Royal Magenta */
-      --accent: #fbc02d;      /* Warm Gold */
-      --rose: #fce4ec;        /* Very light pink for backgrounds */
+      --text: #4a2342;
+      --muted: #91778e;
+      --brand: #c2185b;
+      --accent: #fbc02d;
+      --rose: #fce4ec;
       --shadow: 0 10px 30px rgba(0,0,0,.08);
       --radius: 20px;
     }
-    /* Find this closing brace in your code */
-    }
-
-    /* Paste the new CSS code below here */
 
     /* =================================
        DARK MODE THEME
        ================================= */
     html.dark-mode :root {
-      --bg: #2d1a29;          /* Dark Plum */
-      --card: #3f2a3a;        /* Lighter Dark Plum */
-      --text: #f2e8ef;        /* Light Pinkish Gray */
-      --muted: #a18da0;       /* Muted Lavender */
-      --brand: #e94f8b;       /* Brighter, vibrant magenta for dark BG */
+      --bg: #2d1a29;
+      --card: #3f2a3a;
+      --text: #f2e8ef;
+      --muted: #a18da0;
+      --brand: #e94f8b;
       --shadow: 0 10px 30px rgba(0,0,0,.2);
     }
-    
+
     html.dark-mode .cover {
-      background: #503a4b; /* Darker placeholder for images */
+      background: #503a4b;
     }
 
     /* Theme Toggle Button Styles */
@@ -47,7 +43,7 @@
     html.dark-mode #themeToggle .moon { display: block; }
     html.dark-mode #themeToggle .sun { display: none; }
 
-    /* Ensure card background applies everywhere in dark mode */
+    /* Dark mode overrides */
     html.dark-mode .btn,
     html.dark-mode .panel,
     html.dark-mode .box,
@@ -60,13 +56,11 @@
     html.dark-mode th { background: #503a4b; }
     html.dark-mode .btn.primary { background: var(--brand); color: #fff; }
     html.dark-mode .size button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-    /* END of new CSS */
-
+    html.dark-mode .hero-card { background: linear-gradient(140deg, var(--card), #3f2a3a 40%, #503a4b); }
+    html.dark-mode .nav {background: rgba(45, 26, 41, 0.7);} /* Dark mode nav background */
 
     *{box-sizing:border-box}
-    /* The rest of your styles continue here... */
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;transition: background .3s ease, color .3s ease;}
     a{color:inherit;text-decoration:none}
     .announce{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff}
     .announce-inner{display:flex;gap:32px;white-space:nowrap;overflow:hidden;padding:8px 0;font-weight:600;letter-spacing:.2px}
@@ -74,11 +68,11 @@
     .dot{opacity:.75}
     @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     header{position:sticky;top:36px;z-index:40;backdrop-filter:saturate(140%) blur(6px);}
-    .nav{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:16px}
+    .nav{transition: background .3s ease;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:16px}
     .brand{font-family:"Playfair Display",serif;font-weight:700;font-size:26px;letter-spacing:.2px}
     .tag{font-size:12px;color:var(--muted)}
     .actions{display:flex;align-items:center;gap:12px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(0,0,0,.08);border-radius:12px;background:#fff;box-shadow:var(--shadow);cursor:pointer;font-weight:600}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(0,0,0,.08);border-radius:12px;background:#fff;box-shadow:var(--shadow);cursor:pointer;font-weight:600;transition: background .3s ease, color .3s ease;}
     .btn.primary{background:var(--brand);color:#fff;border-color:transparent}
     .cart-count{background:#000;color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700;transition:transform .2s ease-out}
     .link{border:none;background:transparent;text-decoration:underline;cursor:pointer;color:var(--brand);font-weight:700}
@@ -87,7 +81,7 @@
     @keyframes cart-bounce{0%,100%{transform:translateY(0)} 40%{transform:translateY(-8px)} 60%{transform:translateY(-4px)}}
     @keyframes badge-pop{50%{transform:scale(1.4)}}
     .hero{max-width:1180px;margin:22px auto 10px;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;padding:0 20px}
-    .hero-card{background:linear-gradient(140deg,#fff, #fff5ef 40%, var(--rose));border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
+    .hero-card{transition: background .3s ease;background:linear-gradient(140deg,#fff, #fff5ef 40%, var(--rose));border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
     .hero h1{font-family:"Playfair Display",serif;font-size:40px;line-height:1.1;margin:4px 0 10px}
     .hero p{color:var(--muted);margin:0 0 18px}
     .hero-img{width:100%;height:100%;object-fit:cover;border-radius:18px}
@@ -174,14 +168,14 @@
         <div class="tag">Cozy • Classy • Comfortable</div>
       </div>
       <div class="actions">
-  <button class="link" id="openSizeGuide">Size Guide</button>
-  <button class="btn" id="whatsBtn" title="Chat on WhatsApp">WhatsApp</button>
-  <button class="btn" id="themeToggle" title="Toggle dark/light mode" style="padding: 10px;">
-    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-  </button>
-  <button class="btn primary" id="openCart" aria-label="Open cart">Cart <span class="cart-count" id="cartCount">0</span></button>
-</div>
+        <button class="link" id="openSizeGuide">Size Guide</button>
+        <button class="btn" id="whatsBtn" title="Chat on WhatsApp">WhatsApp</button>
+        <button class="btn" id="themeToggle" title="Toggle dark/light mode" style="padding: 10px;">
+          <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button class="btn primary" id="openCart" aria-label="Open cart">Cart <span class="cart-count" id="cartCount">0</span></button>
+      </div>
     </nav>
   </header>
   <section class="hero" aria-label="Hero">
@@ -195,7 +189,7 @@
           <div class="badge">Made in India</div>
         </div>
       </div>
-      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/aruna-nighties-jammigadda-suryapet-readymade-garment-retailers-ayojtsizaf.jpg"/>
+      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://images.unsplash.com/photo-1594379417551-99c075ante7b?q=80&w=1887&auto=format&fit=crop"/>
     </div>
   </section>
   <section class="section" aria-label="Products">
@@ -313,21 +307,21 @@
        CONFIG — EDIT THESE
        ===================== */
     const BRAND = "Aruna Textiles & Nighties";
-    const WHATSAPP_NUMBER = "918125210950"; 
+    const WHATSAPP_NUMBER = "918125210950";
     const UPI_ID = "9347890690@ybl";
     const UPI_DEEP_LINK_BASE = "upi://pay?pa=9347890690@ybl&pn=Aruna%20Textiles&cu=INR&am=";
     const OFFERS = [
-      "Buy 2 Get Jaiyesh Free", "Free Shipping for jaiyesh", "Festive Collection — 100% Off", "New: Maternity & Plus Sizes"
+      "Free Shipping on Orders Over ₹1500", "Festive Collection — 20% Off", "New: Maternity & Plus Sizes", "Easy Returns & Exchanges"
     ];
     const PRODUCTS = [
-      {id:"p1", name:"jaiyesh white", price:799, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/02d4f402eaae8cd5af6c31d873ae6bf3c05609d7/images/1.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p2", name:"black coffee", price:999, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/2.jpeg", sizes:["M","L","XL","XXL","3XL"]},
-      {id:"p3", name:"Vari Celebrations", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/3.jpeg", sizes:["M","L","XL"]},
-      {id:"p4", name:"Trail room trials", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/4.jpg", sizes:["L","XL","XXL"]},
-      {id:"p5", name:"first image", price:1299, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/5.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p6", name:"Pondy Blue scooty", price:849, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/6.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p7", name:"Trip with bhAAi", price:1499, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/7.jpeg", sizes:["M","L","XL"]},
-      {id:"p8", name:"Classic Solid Nighty", price:699, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/7.jpeg", sizes:["M","L","XL","XXL","3XL"]}
+      {id:"p1", name:"Pastel Bloom Nighty", price:799, img:"https://images.unsplash.com/photo-1616641774882-8a1b6a1b2b1a?w=500", sizes:["M","L","XL","XXL"]},
+      {id:"p2", name:"Crimson Floral Gown", price:999, img:"https://images.unsplash.com/photo-1585255318859-99a1a5b28574?w=500", sizes:["M","L","XL","XXL","3XL"]},
+      {id:"p3", name:"Aqua Polka Dot Set", price:899, img:"https://images.unsplash.com/photo-1601328211622-f67462bd81e0?w=500", sizes:["M","L","XL"]},
+      {id:"p4", name:"Lavender Stripe Nighty", price:899, img:"https://images.unsplash.com/photo-1576426863848-c2b6fd34336c?w=500", sizes:["L","XL","XXL"]},
+      {id:"p5", name:"Peach Comfort Gown", price:1299, img:"https://images.unsplash.com/photo-1542884748-2b87b36c6b90?w=500", sizes:["M","L","XL","XXL"]},
+      {id:"p6", name:"Midnight Blue Classic", price:849, img:"https://images.unsplash.com/photo-1611741586909-1f49e7d6d9e2?w=500", sizes:["M","L","XL","XXL"]},
+      {id:"p7", name:"Rose Gold Satin Set", price:1499, img:"https://images.unsplash.com/photo-1604328424597-4d92a154a1a3?w=500", sizes:["M","L","XL"]},
+      {id:"p8", name:"Classic Solid Nighty", price:699, img:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=500", sizes:["M","L","XL","XXL","3XL"]}
     ];
 
     /* =====================
@@ -536,51 +530,38 @@
         openCart();
         el('#toast').classList.remove('show');
     };
-    /* Find this closing brace in your code */
+    /* =====================
+       DARK MODE TOGGLE LOGIC
+       ===================== */
+    const themeToggle = el('#themeToggle');
+    const THEME_KEY = 'arunaTheme';
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+      }
+      localStorage.setItem(THEME_KEY, theme);
     }
 
-    /* Paste the new CSS code below here */
-
-    /* =================================
-       DARK MODE THEME
-       ================================= */
-    html.dark-mode :root {
-      --bg: #2d1a29;          /* Dark Plum */
-      --card: #3f2a3a;        /* Lighter Dark Plum */
-      --text: #f2e8ef;        /* Light Pinkish Gray */
-      --muted: #a18da0;       /* Muted Lavender */
-      --brand: #e94f8b;       /* Brighter, vibrant magenta for dark BG */
-      --shadow: 0 10px 30px rgba(0,0,0,.2);
-    }
-    
-    html.dark-mode .cover {
-      background: #503a4b; /* Darker placeholder for images */
+    function toggleTheme() {
+      const currentTheme = localStorage.getItem(THEME_KEY) || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
     }
 
-    /* Theme Toggle Button Styles */
-    #themeToggle .moon { display: none; }
-    #themeToggle .sun { display: block; }
-    html.dark-mode #themeToggle .moon { display: block; }
-    html.dark-mode #themeToggle .sun { display: none; }
+    // Apply saved theme or system preference on load
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    /* Ensure card background applies everywhere in dark mode */
-    html.dark-mode .btn,
-    html.dark-mode .panel,
-    html.dark-mode .box,
-    html.dark-mode .badge,
-    html.dark-mode .toast,
-    html.dark-mode table th {
-        background: var(--card);
-        color: var(--text);
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    } else if (prefersDark) {
+      applyTheme('dark');
     }
-    html.dark-mode th { background: #503a4b; }
-    html.dark-mode .btn.primary { background: var(--brand); color: #fff; }
-    html.dark-mode .size button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-    /* END of new CSS */
 
-
-    *{box-sizing:border-box}
-    /* The rest of your styles continue here... */
+    themeToggle.onclick = toggleTheme;
   </script>
 </body>
 </html>
