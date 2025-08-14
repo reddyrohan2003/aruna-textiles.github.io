@@ -9,29 +9,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#fff8f2;          /* warm cream */
-      --card:#ffffff;
-      --text:#2d2a26;        /* deep brown */
-      --muted:#6f655e;       /* taupe */
-      --brand:#c58f63;       /* soft gold */
-      --accent:#e2b899;      /* blush gold */
-      --rose:#e7c8c2;        /* rose tint */
-      --shadow:0 10px 30px rgba(0,0,0,.08);
-      --radius:20px;
+    :root {
+      --bg: #fffbfd;          /* Off-white with a hint of pink */
+      --card: #ffffff;
+      --text: #4a2342;        /* Deep Plum/Aubergine */
+      --muted: #91778e;       /* Muted purple-gray */
+      --brand: #c2185b;       /* Royal Magenta */
+      --accent: #fbc02d;      /* Warm Gold */
+      --rose: #fce4ec;        /* Very light pink for backgrounds */
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius: 20px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;}
     a{color:inherit;text-decoration:none}
-
-    /* Top announcement bar (auto scrolling offers) */
     .announce{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff}
     .announce-inner{display:flex;gap:32px;white-space:nowrap;overflow:hidden;padding:8px 0;font-weight:600;letter-spacing:.2px}
     .ticker{display:inline-flex;gap:40px;animation:scroll 24s linear infinite}
     .dot{opacity:.75}
     @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-    /* Header */
     header{position:sticky;top:36px;z-index:40;backdrop-filter:saturate(140%) blur(6px);}
     .nav{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:16px}
     .brand{font-family:"Playfair Display",serif;font-weight:700;font-size:26px;letter-spacing:.2px}
@@ -41,14 +37,10 @@
     .btn.primary{background:var(--brand);color:#fff;border-color:transparent}
     .cart-count{background:#000;color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700;transition:transform .2s ease-out}
     .link{border:none;background:transparent;text-decoration:underline;cursor:pointer;color:var(--brand);font-weight:700}
-    
-    /* Cart Button Animation */
     .cart-bounce{animation:cart-bounce .6s ease}
     .cart-count.pop{animation:badge-pop .3s ease-out}
     @keyframes cart-bounce{0%,100%{transform:translateY(0)} 40%{transform:translateY(-8px)} 60%{transform:translateY(-4px)}}
     @keyframes badge-pop{50%{transform:scale(1.4)}}
-
-    /* Hero */
     .hero{max-width:1180px;margin:22px auto 10px;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;padding:0 20px}
     .hero-card{background:linear-gradient(140deg,#fff, #fff5ef 40%, var(--rose));border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden}
     .hero h1{font-family:"Playfair Display",serif;font-size:40px;line-height:1.1;margin:4px 0 10px}
@@ -56,12 +48,8 @@
     .hero-img{width:100%;height:100%;object-fit:cover;border-radius:18px}
     .badges{display:flex;gap:10px;flex-wrap:wrap}
     .badge{background:#fff;border:1px solid rgba(0,0,0,.06);padding:8px 10px;border-radius:999px;font-size:12px;font-weight:700}
-
-    /* Section titles */
     .section{max-width:1180px;margin:26px auto;padding:0 20px}
     .section h2{font-family:"Playfair Display",serif;font-size:28px;margin:6px 0 14px}
-
-    /* Product grid */
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
     .card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:12px;display:flex;flex-direction:column}
     .cover{aspect-ratio:3/4;background:#f4eee8;border-radius:14px;overflow:hidden}
@@ -74,8 +62,6 @@
     .size button{border:1px solid rgba(0,0,0,.14);background:#fff;border-radius:10px;padding:6px 8px;cursor:pointer;font-weight:700}
     .size button.active{background:#111;color:#fff;border-color:#111}
     .add{margin-top:auto}
-
-    /* Cart drawer */
     .drawer{position:fixed;inset:0;display:none}
     .drawer.open{display:block}
     .scrim{position:absolute;inset:0;background:rgba(0,0,0,.36)}
@@ -92,12 +78,8 @@
     .cta{display:flex;gap:8px}
     .cta .btn{flex:1;justify-content:center;padding:14px 16px;border-radius:14px}
     .small{font-size:12px;color:var(--muted)}
-
-    /* Footer */
     footer{max-width:1180px;margin:40px auto 60px;padding:0 20px;color:var(--muted)}
     footer .cols{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:20px}
-
-    /* Generic Modal Styling */
     .modal{position:fixed;inset:0;display:none}
     .modal.open{display:block;z-index:100}
     .modal .bg{position:absolute;inset:0;background:rgba(0,0,0,.45)}
@@ -105,24 +87,16 @@
     .box header{padding:16px 18px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
     .box .content{padding:16px 18px}
     .box footer{max-width:100%;padding:10px 18px;margin:0;border-top:1px solid #eee;display:flex;justify-content:flex-end;gap:10px}
-
-    /* Size Guide Table */
     table{width:100%;border-collapse:collapse}
     th,td{border:1px solid #eee;padding:10px;text-align:center}
     th{background:#faf7f4}
-    
-    /* Delivery Form */
     .form-group{margin-bottom:14px}
     .form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
     .form-group input, .form-group textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:10px;background:#faf7f4}
     .form-group textarea{resize:vertical;min-height:80px}
-
-    /* "Added to Cart" Toast Popup */
     .toast{position:fixed;bottom:20px;right:20px;z-index:110;background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:12px 16px;display:flex;align-items:center;gap:12px;transform:translateY(150%);opacity:0;transition:transform .4s ease, opacity .4s ease}
     .toast.show{transform:translateY(0);opacity:1}
     .toast .btn{padding:8px 12px;border-radius:10px;background:var(--accent);color:#fff;border:none}
-
-    /* Responsive */
     @media (max-width:1024px){
       .grid{grid-template-columns:repeat(3,1fr)}
       .hero{grid-template-columns:1fr}
@@ -148,7 +122,6 @@
       <div class="ticker" id="tickerB" aria-hidden="true"></div>
     </div>
   </div>
-
   <header>
     <nav class="nav">
       <div>
@@ -162,7 +135,6 @@
       </div>
     </nav>
   </header>
-
   <section class="hero" aria-label="Hero">
     <div class="hero-card">
       <div>
@@ -174,10 +146,9 @@
           <div class="badge">Made in India</div>
         </div>
       </div>
-      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/aruna-nighties-jammigadda-suryapet-readymade-garment-retailers-ayojtsizaf.jpg"/>
+      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://images.unsplash.com/photo-1594379417551-99c075ante7b?q=80&w=1887&auto=format&fit=crop"/>
     </div>
   </section>
-
   <section class="section" aria-label="Products">
     <div style="display:flex;justify-content:space-between;align-items:end;gap:10px">
       <h2>Trending Nighties</h2>
@@ -185,7 +156,6 @@
     </div>
     <div class="grid" id="grid"></div>
   </section>
-
   <footer>
     <div class="cols">
       <div>
@@ -204,7 +174,6 @@
       </div>
     </div>
   </footer>
-
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="scrim" id="closeCart" tabindex="0" aria-label="Close"></div>
     <aside class="panel" role="dialog" aria-labelledby="cartTitle">
@@ -233,7 +202,6 @@
       </div>
     </aside>
   </div>
-
   <div class="modal" id="sizeModal" aria-hidden="true" role="dialog" aria-labelledby="sizeTitle">
     <div class="bg" id="sizeBg"></div>
     <div class="box">
@@ -259,7 +227,6 @@
       </div>
     </div>
   </div>
-  
   <div class="modal" id="deliveryModal" aria-hidden="true" role="dialog" aria-labelledby="deliveryTitle">
     <div class="bg" id="deliveryBg"></div>
     <div class="box">
@@ -288,33 +255,30 @@
       </footer>
     </div>
   </div>
-
   <div class="toast" id="toast">
     <span>✅ Added to cart!</span>
     <button class="btn" id="toastViewCart">View Cart</button>
   </div>
-
-
   <script>
     /* =====================
        CONFIG — EDIT THESE
        ===================== */
     const BRAND = "Aruna Textiles & Nighties";
-    const WHATSAPP_NUMBER = "918125210950"; 
+    const WHATSAPP_NUMBER = "918125210950";
     const UPI_ID = "9347890690@ybl";
     const UPI_DEEP_LINK_BASE = "upi://pay?pa=9347890690@ybl&pn=Aruna%20Textiles&cu=INR&am=";
     const OFFERS = [
-      "Buy 2 Get Jaiyesh Free", "Free Shipping for jaiyesh", "Festive Collection — 100% Off", "New: Maternity & Plus Sizes"
+      "Free Shipping on Orders Over ₹1500", "Festive Collection — 20% Off", "New: Maternity & Plus Sizes", "Easy Returns & Exchanges"
     ];
     const PRODUCTS = [
-      {id:"p1", name:"jaiyesh white", price:799, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/02d4f402eaae8cd5af6c31d873ae6bf3c05609d7/images/1.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p2", name:"black coffee", price:999, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/2.jpeg", sizes:["M","L","XL","XXL","3XL"]},
-      {id:"p3", name:"Vari Celebrations", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/3.jpeg", sizes:["M","L","XL"]},
-      {id:"p4", name:"Trail room trials", price:899, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/4.jpg", sizes:["L","XL","XXL"]},
-      {id:"p5", name:"first image", price:1299, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/5.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p6", name:"Pondy Blue scooty", price:849, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/6.jpeg", sizes:["M","L","XL","XXL"]},
-      {id:"p7", name:"Trip with bhAAi", price:1499, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/7.jpeg", sizes:["M","L","XL"]},
-      {id:"p8", name:"Classic Solid Nighty", price:699, img:"https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/7.jpeg", sizes:["M","L","XL","XXL","3XL"]}
+      {id:"p1", name:"Pastel Bloom Nighty", price:799, img:"https://images.unsplash.com/photo-1616641774882-8a1b6a1b2b1a?w=500", sizes:["M","L","XL","XXL"]},
+      {id:"p2", name:"Crimson Floral Gown", price:999, img:"https://images.unsplash.com/photo-1585255318859-99a1a5b28574?w=500", sizes:["M","L","XL","XXL","3XL"]},
+      {id:"p3", name:"Aqua Polka Dot Set", price:899, img:"https://images.unsplash.com/photo-1601328211622-f67462bd81e0?w=500", sizes:["M","L","XL"]},
+      {id:"p4", name:"Lavender Stripe Nighty", price:899, img:"https://images.unsplash.com/photo-1576426863848-c2b6fd34336c?w=500", sizes:["L","XL","XXL"]},
+      {id:"p5", name:"Peach Comfort Gown", price:1299, img:"https://images.unsplash.com/photo-1542884748-2b87b36c6b90?w=500", sizes:["M","L","XL","XXL"]},
+      {id:"p6", name:"Midnight Blue Classic", price:849, img:"https://images.unsplash.com/photo-1611741586909-1f49e7d6d9e2?w=500", sizes:["M","L","XL","XXL"]},
+      {id:"p7", name:"Rose Gold Satin Set", price:1499, img:"https://images.unsplash.com/photo-1604328424597-4d92a154a1a3?w=500", sizes:["M","L","XL"]},
+      {id:"p8", name:"Classic Solid Nighty", price:699, img:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=500", sizes:["M","L","XL","XXL","3XL"]}
     ];
 
     /* =====================
@@ -329,8 +293,8 @@
        ===================== */
     function buildTicker(){
       const nodes = OFFERS.map(o=>`<span>${o}</span><span class="dot">•</span>`).join('');
-      el('#tickerA').innerHTML = nodes + nodes; // duplicate for continuous scroll
-      el('#tickerB').innerHTML = nodes + nodes; // second track
+      el('#tickerA').innerHTML = nodes + nodes;
+      el('#tickerB').innerHTML = nodes + nodes;
     }
 
     /* =====================
@@ -357,18 +321,15 @@
         });
         const addBtn = make('button',{className:'btn add',textContent:'Add to Cart',ariaLabel:`Add ${p.name} to cart`});
         addBtn.addEventListener('click',()=> addToCart(p, selSize));
-
         const guideBtn = make('button',{className:'link',textContent:'Size Guide'});
         guideBtn.addEventListener('click', openSizeGuide);
-
         const row = make('div',{className:'row'});
         row.append(price, guideBtn);
-
         card.append(cover,title,make('div',{className:'muted',textContent:'100% breathable • Easy-care'}),row,sizeRow,addBtn);
         wrap.appendChild(card);
       });
     }
-    
+
     /* =====================
        CART POPUP NOTIFICATION
        ===================== */
@@ -394,17 +355,14 @@
       if(existing){ existing.qty += 1; }
       else{ cart.push({id:prod.id,name:prod.name,price:prod.price,size,qty:1,img:prod.img}); }
       persist();
-      showToast(); // Show "Added to cart" popup
-      
-      // Animate cart icon
+      showToast();
       const cartBtn = el('#openCart');
       cartBtn.classList.add('cart-bounce');
       cartBtn.addEventListener('animationend', () => cartBtn.classList.remove('cart-bounce'), {once:true});
       const cartCount = el('#cartCount');
       cartCount.classList.add('pop');
       cartCount.addEventListener('animationend', () => cartCount.classList.remove('pop'), {once:true});
-      
-      renderCart(); // Update cart in the background
+      renderCart();
     }
 
     function removeItem(idx){ cart.splice(idx,1); persist(); renderCart(); }
@@ -486,19 +444,17 @@
         const name = el('#custName').value.trim();
         const phone = el('#custPhone').value.trim();
         const address = el('#custAddress').value.trim();
-
         if(!name || !phone || !address){
             alert('Please fill out all delivery details.');
             return;
         }
-
         const customerDetails = {name, phone, address};
         const msg = encodeURIComponent(buildWhatsAppText(customerDetails));
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
         window.open(url, '_blank');
         closeDeliveryModal();
     }
-    
+
     function openWhatsAppChat(){
         const url = `https://wa.me/${WHATSAPP_NUMBER}`;
         window.open(url, '_blank');
@@ -507,11 +463,8 @@
     /* =====================
        MODAL CONTROLS
        ===================== */
-    // Size Guide
     function openSizeGuide(){ el('#sizeModal').classList.add('open'); el('#sizeModal').setAttribute('aria-hidden','false'); }
     function closeSizeGuide(){ el('#sizeModal').classList.remove('open'); el('#sizeModal').setAttribute('aria-hidden','true'); }
-
-    // Delivery Details
     function openDeliveryModal(){ el('#deliveryModal').classList.add('open'); el('#deliveryModal').setAttribute('aria-hidden','false'); }
     function closeDeliveryModal(){ el('#deliveryModal').classList.remove('open'); el('#deliveryModal').setAttribute('aria-hidden','true'); }
 
@@ -522,27 +475,17 @@
     renderGrid();
     renderCart();
     updateBadge();
-
-    // Cart
     el('#openCart').onclick=openCart; el('#closeCart').onclick=closeCart; el('#xBtn').onclick=closeCart;
-    el('#clearBtn').onclick=clearCart; 
-    
-    // Checkout flow
-    el('#waCheckout').onclick=openDeliveryModal; // Opens delivery form instead of WA
-    el('#confirmCheckout').onclick=handleFinalCheckout; // Confirms form and opens WA
-    el('#whatsBtn').onclick=openWhatsAppChat; // Simple chat button
-
-    // Size guide triggers
-    el('#openSizeGuide').onclick=openSizeGuide; el('#openSizeGuide2').onclick=openSizeGuide; 
+    el('#clearBtn').onclick=clearCart;
+    el('#waCheckout').onclick=openDeliveryModal;
+    el('#confirmCheckout').onclick=handleFinalCheckout;
+    el('#whatsBtn').onclick=openWhatsAppChat;
+    el('#openSizeGuide').onclick=openSizeGuide; el('#openSizeGuide2').onclick=openSizeGuide;
     el('#sizeBg').onclick=closeSizeGuide; el('#closeSize').onclick=closeSizeGuide;
-    
-    // New delivery modal triggers
     el('#deliveryBg').onclick=closeDeliveryModal; el('#closeDelivery').onclick=closeDeliveryModal;
-    
-    // New toast trigger
     el('#toastViewCart').onclick = () => {
         openCart();
-        el('#toast').classList.remove('show'); // Hide toast after opening cart
+        el('#toast').classList.remove('show');
     };
   </script>
 </body>
