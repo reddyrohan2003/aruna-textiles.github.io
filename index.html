@@ -20,6 +20,51 @@
       --shadow: 0 10px 30px rgba(0,0,0,.08);
       --radius: 20px;
     }
+    /* Find this closing brace in your code */
+    }
+
+    /* Paste the new CSS code below here */
+
+    /* =================================
+       DARK MODE THEME
+       ================================= */
+    html.dark-mode :root {
+      --bg: #2d1a29;          /* Dark Plum */
+      --card: #3f2a3a;        /* Lighter Dark Plum */
+      --text: #f2e8ef;        /* Light Pinkish Gray */
+      --muted: #a18da0;       /* Muted Lavender */
+      --brand: #e94f8b;       /* Brighter, vibrant magenta for dark BG */
+      --shadow: 0 10px 30px rgba(0,0,0,.2);
+    }
+    
+    html.dark-mode .cover {
+      background: #503a4b; /* Darker placeholder for images */
+    }
+
+    /* Theme Toggle Button Styles */
+    #themeToggle .moon { display: none; }
+    #themeToggle .sun { display: block; }
+    html.dark-mode #themeToggle .moon { display: block; }
+    html.dark-mode #themeToggle .sun { display: none; }
+
+    /* Ensure card background applies everywhere in dark mode */
+    html.dark-mode .btn,
+    html.dark-mode .panel,
+    html.dark-mode .box,
+    html.dark-mode .badge,
+    html.dark-mode .toast,
+    html.dark-mode table th {
+        background: var(--card);
+        color: var(--text);
+    }
+    html.dark-mode th { background: #503a4b; }
+    html.dark-mode .btn.primary { background: var(--brand); color: #fff; }
+    html.dark-mode .size button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+    /* END of new CSS */
+
+
+    *{box-sizing:border-box}
+    /* The rest of your styles continue here... */
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;}
     a{color:inherit;text-decoration:none}
@@ -129,10 +174,14 @@
         <div class="tag">Cozy • Classy • Comfortable</div>
       </div>
       <div class="actions">
-        <button class="link" id="openSizeGuide">Size Guide</button>
-        <button class="btn" id="whatsBtn" title="Chat on WhatsApp">WhatsApp</button>
-        <button class="btn primary" id="openCart" aria-label="Open cart">Cart <span class="cart-count" id="cartCount">0</span></button>
-      </div>
+  <button class="link" id="openSizeGuide">Size Guide</button>
+  <button class="btn" id="whatsBtn" title="Chat on WhatsApp">WhatsApp</button>
+  <button class="btn" id="themeToggle" title="Toggle dark/light mode" style="padding: 10px;">
+    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+  </button>
+  <button class="btn primary" id="openCart" aria-label="Open cart">Cart <span class="cart-count" id="cartCount">0</span></button>
+</div>
     </nav>
   </header>
   <section class="hero" aria-label="Hero">
@@ -146,7 +195,7 @@
           <div class="badge">Made in India</div>
         </div>
       </div>
-      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://images.unsplash.com/photo-1594379417551-99c075ante7b?q=80&w=1887&auto=format&fit=crop"/>
+      <img class="hero-img" alt="Woman wearing pastel nightwear" src="https://raw.githubusercontent.com/reddyrohan2003/aruna-textiles.github.io/main/images/aruna-nighties-jammigadda-suryapet-readymade-garment-retailers-ayojtsizaf.jpg"/>
     </div>
   </section>
   <section class="section" aria-label="Products">
@@ -487,6 +536,51 @@
         openCart();
         el('#toast').classList.remove('show');
     };
+    /* Find this closing brace in your code */
+    }
+
+    /* Paste the new CSS code below here */
+
+    /* =================================
+       DARK MODE THEME
+       ================================= */
+    html.dark-mode :root {
+      --bg: #2d1a29;          /* Dark Plum */
+      --card: #3f2a3a;        /* Lighter Dark Plum */
+      --text: #f2e8ef;        /* Light Pinkish Gray */
+      --muted: #a18da0;       /* Muted Lavender */
+      --brand: #e94f8b;       /* Brighter, vibrant magenta for dark BG */
+      --shadow: 0 10px 30px rgba(0,0,0,.2);
+    }
+    
+    html.dark-mode .cover {
+      background: #503a4b; /* Darker placeholder for images */
+    }
+
+    /* Theme Toggle Button Styles */
+    #themeToggle .moon { display: none; }
+    #themeToggle .sun { display: block; }
+    html.dark-mode #themeToggle .moon { display: block; }
+    html.dark-mode #themeToggle .sun { display: none; }
+
+    /* Ensure card background applies everywhere in dark mode */
+    html.dark-mode .btn,
+    html.dark-mode .panel,
+    html.dark-mode .box,
+    html.dark-mode .badge,
+    html.dark-mode .toast,
+    html.dark-mode table th {
+        background: var(--card);
+        color: var(--text);
+    }
+    html.dark-mode th { background: #503a4b; }
+    html.dark-mode .btn.primary { background: var(--brand); color: #fff; }
+    html.dark-mode .size button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+    /* END of new CSS */
+
+
+    *{box-sizing:border-box}
+    /* The rest of your styles continue here... */
   </script>
 </body>
 </html>
